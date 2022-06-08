@@ -6,7 +6,7 @@
 
 ![inCaseOfFire](git_github.assets/inCaseOfFire.png)
 
-[toc]
+[[_TOC_]]
 
 ## Git 에 기록을 남기는 순서
 
@@ -74,7 +74,7 @@
 
 
 
-## 끝말잊기 하기
+##  하기
 
 > 혼자서 끝말잊기를 진행해봅시다.
 
