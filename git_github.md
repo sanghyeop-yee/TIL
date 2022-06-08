@@ -90,3 +90,137 @@
 * 반대쪽에서 pull
 * 단어 적어 -> add - commit - push
 * 반대쪽에서 pull
+
+
+
+## Branch - Master
+
+`git log --online --graph`
+
+`git log --online --graph --all`
+
+`git switch -c new` 
+
+`git switch master`
+
+`git merge new`
+
+
+
+
+
+```
+git checkout // mac 맥에서는 checkout 으로 사용
+
+git switch // branch 이동
+
+git restore // 커밋상태로 백업 (ctr+z)
+
+```
+
+```
+git branch new // 새로운 브랜치 (new) 생성 
+
+git checkout new // 새로운 브랜치로 이동
+
+git checkout -b new // 새로운 브랜치 생성하고 이동하기
+
+git branch -b <branch> // 새로운 브랜치 생성하고 이동하기
+
+git log --oneline
+```
+
+
+
+Fast forward
+
+Three ways
+
+Conflicts
+
+
+
+```
+mkdir branch3
+cd branch3
+
+git init
+touch a
+git add .
+git commit -m 'first commit'
+git branch new
+git log --oneline
+
+git checkout new
+git log --oneline
+touch new.txt
+git add .
+git commit -m 'new1'
+git checkout master
+
+touch master.txt
+git add .
+git commit -m 'master'
+
+git log --oneline
+git log --oneline --all
+git log --oneline --all --graph
+
+```
+
+
+
+Three-way Merge
+
+```
+// master branch
+git init
+touch a.txt
+git add .
+git commit -m 'first commit'
+
+git checkout -b new
+
+touch new.txt
+git add .
+git commit -m 'new'
+
+git checkout master
+
+ls
+
+// 마스터에서 a.txt 변경
+git status
+git add .
+git commit -m 'master'
+
+git status
+
+// new branch 로 이동
+git checkout new
+
+open a.txt
+// 텍스트 변경
+
+git add .
+git commit -m 'a in new'
+
+git checkout master
+git merge new
+
+git status
+// conflict 해결하기
+git add .
+git status
+git commit -m 'conflict merge'
+
+git log --oneline --graph
+```
+
+
+
+New 라는 브랜치를 올릴때
+
+`git push origin new`
+
+* 올리고 나서 Pull Request 하기
