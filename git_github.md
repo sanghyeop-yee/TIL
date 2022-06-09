@@ -48,6 +48,8 @@
 
 
 
+
+
 ## Git Clone / Pull 하기
 
 > Github 에 있는 Repository 를 옮겨오기
@@ -74,9 +76,9 @@
 
 
 
-##  하기
+### 끝말잇기 하기
 
-> 혼자서 끝말잊기를 진행해봅시다.
+> 혼자서 끝말잇기를 진행해봅시다.
 
 * word_relay.md 만들기
 * add - commit - push
@@ -93,41 +95,47 @@
 
 
 
-## Branch - Master
 
-`git log --online --graph`
 
-`git log --online --graph --all`
+## Branch
 
-`git switch -c new` 
-
-`git switch master`
-
-`git merge new`
+> 브랜치란 나뭇가지처럼 여러 갈래로 작업 공간을 나누어 독립적으로 작업할 수 있도록 도와주는 Git 의 도구입니다.
 
 
 
+### git branch
 
+```bash
+# 브랜치 목록 확인
+$ git branch
 
+# 원격 저장소의 브랜치 목록 확인
+$ git branch -r
+
+# 새로운 브랜치 생성
+$ git branch <브랜치 이름>
+
+# 특정 커밋 기준으로 브랜치 생성
+$ git branch <브랜치 이름> <커밋 ID>
+
+# 특정 브랜치 삭제
+$ git branch -d <브랜치 이름> # 병합된 브랜치만 삭제 가능
+$ git branch -D <브랜치 이름> # (주의) 강제 삭제 (병합되지 않은 브랜치도 삭제 가능)
 ```
-git checkout // mac 맥에서는 checkout 으로 사용
 
-git switch // branch 이동
 
-git restore // 커밋상태로 백업 (ctr+z)
 
-```
+### git checkout
 
-```
-git branch new // 새로운 브랜치 (new) 생성 
+```bash
+# 새로운 브랜치 (new) 생성 
+git branch <branch> 
 
-git checkout new // 새로운 브랜치로 이동
+# 새로운 브랜치로 이동
+git checkout <branch>
 
-git checkout -b new // 새로운 브랜치 생성하고 이동하기
-
-git branch -b <branch> // 새로운 브랜치 생성하고 이동하기
-
-git log --oneline
+# 새로운 브랜치 생성하고 이동하기
+git checkout -b <branch>
 ```
 
 
