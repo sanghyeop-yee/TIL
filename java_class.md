@@ -80,3 +80,80 @@ void myMethod() {
 * 메소드에서 값을 받을 때 사용하는 변수를 매개 변수 (parameter)
 
 ![image-20220613203514312](java_class.assets/image-20220613203514312.png)
+
+### 오버로딩
+
+> 같은 클래스내에서 같은 메소드명이 여러개 존재하는 것을 말합니다.
+>
+> 매개변수의 갯수나 데이터형이 달라야합니다.
+
+```java
+
+public class Overloading {
+	
+	public Overloading() {
+		
+	}
+	
+	// 오버로딩: 같은 클래스내에서 같은 메소드명이 여러개 존재하는 것을 말한다.
+	//		   매개변수의 갯수나 데이터형이 달라야한다. 
+	
+	// 1~100까지 합
+	public void sum() {
+		System.out.println("1~100 까지의 합은 5050");
+	}
+	// 1~?까지의 합
+	public void sum(int max) {
+		int tot = 0;
+		for(int i=1; i<=max; i++) {
+			tot += i;
+		}
+		System.out.println("1~"+max+" 까지의 합은 "+tot);
+	}
+	// 1~?까지의 홀수 합
+	public void sum(int max, String msg) {
+		int tot = 0;
+		for(int i=1; i<=max; i+=2) {
+			tot += i;
+		}
+		System.out.println("1~"+max+" 까지의 홀수 합은 "+tot);
+	}
+	// 1~?까지의 짝수 합
+	public void sum(String msg, int max) { // 매개변수의 순서가 달라도 가능
+		int tot = 0;
+		for(int i=2; i<=max; i+=2) {
+			tot += i;
+		}
+		System.out.println("1~"+max+" 까지의 수 합은 "+tot);
+	}
+	
+	
+	public static void main(String[] args) {
+		// Overloading 클래스를 객체로 만들어서 메소드 사용 
+		Overloading o = new Overloading(); // 객체생성
+		o.sum(343);
+		o.sum(10, "Odd");
+
+	}
+
+}
+```
+
+
+
+## 상속 (Inheritance)
+
+> 부모 객체는 자기가 가지고 있는 필드와 메소드를 자식 객체에게 물려주어 자식 객체가 사용할 수 있도록 해줍니다.
+
+
+
+`public class Sedan extends Car{}`
+
+* 상속관계에서 최상위는 Object 입니다.
+
+
+
+
+
+## 추상클래스
+
