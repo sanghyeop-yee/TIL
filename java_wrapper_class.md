@@ -14,9 +14,14 @@
 		
 		// i 를 객체로 만들기
 		Integer intObj = Integer.valueOf(i); // new Integer(i);
-    
     // 기본데이터형이 객체화됨 (오토박싱) - 1.5 버전 이상부터 가능
     Integer intObj2 = i;
+    
+   String data = "254";
+		// 문자열을 숫자로 변경
+		Integer y = new Integer(data);
+		int z1 = Integer.parseInt(data); // int
+		Integer z2 = Integer.valueOf(data); // Integer
 	}
 ```
 
