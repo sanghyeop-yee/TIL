@@ -1,4 +1,4 @@
-# Java Collection Set:
+# Java Collection Framework - Set
 
 # HashSet, TreeSet, LinkedHashSet
 

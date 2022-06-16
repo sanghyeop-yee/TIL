@@ -1,10 +1,10 @@
-# Collection - List
+# Java Collection Framework - List
 
 > Thu Jun 16, 2022
 
 ---
 
-
+[toc] 
 
 ## Collection Framework (자료구조)
 
@@ -12,11 +12,15 @@
 
 
 
-배열은 저장할 크기가 배열을 생성할 때 결정되어있어 배열의 크기가 넘어가면 저장이 불가능하죠. 또한 데이터를 삭제하면 해당 인덱스의 데이터는 비워있는 구조를 갖는 등 여러 문제점이 발생됩니다.
+배열은 저장할 크기가 배열을 생성할 때 결정되어있어 배열의 크기가 넘어가면 저장이 불가능하죠. 
+또한 데이터를 삭제하면 해당 인덱스의 데이터는 비워있는 구조를 갖는 등 여러 문제점이 발생됩니다.
 
-이러한 문제점을 컬렉션 프레임워크를 통해서 해결이 가능합니다.
 
+
+이러한 문제점을 컬렉션 프레임워크를 통해서 해결이 가능합니다. 
 java.util 패키지에 Collection 과 Map 인터페이스가 있습니다.
+
+
 
 - Collection 인터페이스 상속받는 대표적인 인터페이스 List, Set
   - List 을 구현하는 클래스들: ArrayList, Vector, LinkedList
@@ -29,11 +33,9 @@ java.util 패키지에 Collection 과 Map 인터페이스가 있습니다.
 
 ![image-20220616195247399](java_collection_framework.assets/image-20220616195247399.png)
 
-
-
 ## List
 
-> 인덱스 순서로 저장이 되며, 중복된 데이터 저장이 가능하며 데이터를 일렬로 늘어놓는 구조입니다.
+> 인덱스 순서로 저장이 되며, 중복된 데이터 저장이 가능하고 데이터를 일렬로 늘어놓는 구조입니다.
 
 ![image-20220616195652024](java_collection_framework.assets/image-20220616195652024.png)
 
@@ -59,6 +61,12 @@ V -> Value
 E -> Element (매개변수)
 
 
+
+### LinkedList
+
+FIFO (First-In First-Out) 은행 번호표같은 Queue 기능은 LinkedList 에 존재합니다.
+
+양쪽에서 꺼내고 집어넣을수 있는 Deque 기능 역시 LinkedList 에 존재합니다.
 
 
 
@@ -99,10 +107,4 @@ public class StackTest {
 ```
 
 
-
-## LinkedList
-
-FIFO (First-In First-Out) 은행 번호표같은 Queue 기능은 LinkedList 에 존재합니다.
-
-양쪽에서 꺼내고 집어넣을수 있는 Deque 기능 역시 LinkedList 에 존재합니다.
 
