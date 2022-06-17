@@ -1,12 +1,10 @@
-# Java Collection Framework - Set
-
-# HashSet, TreeSet, LinkedHashSet
+# Java Collection Framework - Set 
 
 > Thu Jun 16, 2022
 
 ---
 
-
+[toc]
 
 > Set 는 List 와 다르게 객체 (데이터) 를 중복해서 저장할 수 없습니다. 또한 저장 순서가 보장되지 않습니다.
 

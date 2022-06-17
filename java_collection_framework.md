@@ -50,15 +50,9 @@ java.util 패키지에 Collection 과 Map 인터페이스가 있습니다.
 
 
 
-### Generic
+### Vector 
 
-> 하나의 데이터 타입만 받을수 있다고 미리 선언하여 형변환없이 사용 가능
 
-K -> Key
-
-V -> Value
-
-E -> Element (매개변수)
 
 
 
@@ -107,4 +101,63 @@ public class StackTest {
 ```
 
 
+
+## Generic
+
+> 하나의 데이터 타입만 받을수 있다고 미리 선언하여 형변환없이 사용 가능
+
+<E> 는 제네릭 타입이며 생략시 Object 데이터 타입입니다. 
+
+* <K> -> Key
+* <V> -> Value
+* <E> -> Element (매개변수)
+
+Object 은 모든 데이터 타입 저장 가능하지만 데이터를 가지고 나오거나, 데이터 추가 및 검색시 형변환 필요합니다.
+만약 <T> 처럼 임의의 제너릭으로 선언하면 클래스 하나로 여러 타입의 데이터를 처리할 수 있습니다.
+
+
+
+```java
+public class ProductVO<T> {
+	// 상품명을 저장하는 ___ 캡슐화
+	private T productName;
+	public ProductVO() {
+		
+	}
+	public T getProductName() {
+		return productName;
+	}
+	public void setProductName(T productName) {
+		this.productName = productName;
+	}
+
+}
+```
+
+
+
+```java
+public class GenericMain {
+
+	public GenericMain() {
+		ProductVO vo1 = new ProductVO();
+		vo1.setProductName("Computer");
+		
+		vo1.setProductName(new MemberVO(1234, "AAA", "Strategy", "540-504-3234"));
+		
+		MemberVO vo = (MemberVO)vo1.getProductName();
+		System.out.println(vo.toString());
+	}
+	public void start() {
+		
+	}
+
+	public static void main(String[] args) {
+		// 객체생성
+		new GenericMain().start();
+
+	}
+
+}
+```
 
