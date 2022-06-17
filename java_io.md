@@ -79,7 +79,7 @@ public class InputStreamTest {
 
 
 
-### BufferedReaderTest
+### BufferedReader
 
 >  한줄씩 읽어오려면?
 >
@@ -122,4 +122,56 @@ public class BufferedReaderTest {
 ```
 
 
+
+### File
+
+> 파일에 있는 내용을 읽어서 가져오려면?
+>
+> 드라이브, 폴더, 파일에 관련한 정보를 사용하기 위해서는 File 객체를 생성하여야 합니다.
+
+[Java.io.file](https://docs.oracle.com/javase/8/docs/api/index.html) 자바 문서에서 확인해봅시다.
+
+
+
+`File(File parent, String child)`
+
+`File(String parent, String child)`
+
+`File(String pathname)`
+
+
+
+```java
+import java.io.File;
+
+public class FileTest {
+
+	public FileTest() {
+		
+	}
+	public void start() {
+		// 드라이브, 폴더, 파일에 관련한 정보를 사용하기 위해서는 File 객체를 생성하여야 한다.
+		/*
+		 	File(File parent, String child)
+		 	File(String parent, String child)
+		 	
+		 	File(String pathname)
+		 */
+		File f1 = new File("/Users/myname");
+		File f2 = new File("/Users/myname/TIL");
+		File f3 = new File("/Users/myname/TIL/java_io.md");
+		
+		File f4 = new File(f2, "java_io.md");
+		
+		System.out.println(f2.exists());
+		System.out.println(f3.exists());
+	}
+
+	public static void main(String[] args) {
+		new FileTest().start();
+
+	}
+
+}
+```
 
