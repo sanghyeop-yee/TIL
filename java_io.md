@@ -175,3 +175,106 @@ public class FileTest {
 }
 ```
 
+
+
+### FileWriter
+
+콘솔에서 문자열을 줄단위로 입력받아 파일로 쓰기
+
+```java
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+
+public class FileWriterTest {
+
+	public FileWriterTest() {
+		
+	}
+	public void start() {
+		// 콘솔에서 문자열을 줄단위로 입력받아 파일로 쓰기
+		try {
+			// BufferedReader
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Enter text: ");
+			String inData = br.readLine();
+			
+			File file = new File("/Users/myname/test", "outputTest.java");
+			FileWriter fw = new FileWriter(file);
+			
+			fw.write(inData, 0, inData.length());
+			
+			fw.close();
+			
+		}catch(Exception e) {
+			System.out.println("Exceeption occured.");
+		}
+		System.out.println("Program ended");
+		
+	}
+
+	public static void main(String[] args) {
+		new FileWriterTest().start();
+
+	}
+
+}
+
+```
+
+
+
+하나의 디렉토리에서 다른 디렉토리로 복사를 하는 방법
+
+```java
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class FileCopy {
+
+	public FileCopy() {
+		
+	}
+	public void start() {
+		// 파일복사
+		// /Users/sanghyeop/eclipse-workspace/basic01/src/GuGuDan.java
+		// /Users/sanghyeop/test/GuGuDan.java
+		File orgFile = new File("/Users/sanghyeop/eclipse-workspace/basic01/src/GuGuDan.java");
+		File tarFile = new File("/Users/sanghyeop/test/GuGuDan.java");
+		
+		try {
+			// 바이트수 만큼 한번에 orgFile 파일의 내용을 읽어 tarFile 로 쓰기를 한다.
+			FileInputStream fis = new FileInputStream(orgFile);
+			FileOutputStream fos = new FileOutputStream(tarFile);
+			
+			// 파일의 내용을 읽어서 저장할 배열
+			byte[] sourceCode = new byte[(int)orgFile.length()];
+			
+			// 읽어온 바이트수를 리턴해준다. 
+			int cnt = fis.read(sourceCode);
+			
+			// 쓰기
+			fos.write(sourceCode, 0, cnt);
+			
+			fis.close();
+			fos.close();
+			
+		}catch(FileNotFoundException fnfe) {
+			System.out.println("File not found. -> "+ fnfe.getMessage());
+		}catch(IOException ie) {
+			System.out.println("I/O error occured -> "+ ie.getMessage());
+		}
+	}
+
+	public static void main(String[] args) {
+		new FileCopy().start();
+
+	}
+
+}
+```
+
