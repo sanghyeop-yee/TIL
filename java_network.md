@@ -489,3 +489,96 @@ public class FileUnicastSend {
 
 ### MultiSocket
 
+**Client**
+
+```java
+// 보내는쪽
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
+
+public class MulticastSend {
+	// 사용가능 공용 IP 주소 : 224.0.0.0 ~ 239.255.255.255
+	// 사용할 공용 IP 주소 : 224.42.42.42
+	
+	// 변수 생성
+	MulticastSocket ms;
+	DatagramPacket dp;
+	InetAddress ia;
+	final int PORT = 420;
+	
+	public MulticastSend() {
+		// 보낼 내용
+		String str = "Practicing network via Multicast";
+		try {
+			ms = new MulticastSocket();
+			ia = InetAddress.getByName("224.42.42.42");
+			dp = new DatagramPacket(str.getBytes(), 0, str.getBytes().length, ia, PORT);
+			
+			ms.send(dp); // 공용아이피로 전송
+			System.out.println("Message sent!");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		new MulticastSend();
+		
+	}
+
+}
+
+```
+
+
+
+**Server**
+
+```java
+// 받는쪽
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.MulticastSocket;
+import java.net.NetworkInterface;
+
+public class MulticastReceive {
+	// 변수 생성
+	MulticastSocket ms;
+	DatagramPacket dp;
+	InetAddress ia;
+	final int PORT = 420;
+
+	public MulticastReceive() {
+		try {
+			ms = new MulticastSocket(PORT);
+			ia = InetAddress.getByName("224.42.42.42");
+			
+			InetSocketAddress isa = new InetSocketAddress(ia, PORT);
+			NetworkInterface ni = NetworkInterface.getByName("john");
+			ms.joinGroup(isa, ni);
+			
+			byte data[] = new byte[512];
+			dp = new DatagramPacket(data, data.length);
+			ms.receive(dp); // 받기 대기중
+			
+			System.out.println(new String(dp.getData(), 0, dp.getLength()));
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		new MulticastReceive();
+
+	}
+
+}
+
+```
+
