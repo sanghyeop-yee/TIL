@@ -358,3 +358,134 @@ public class UnicastSend {
 
 ```
 
+
+
+### FileUnicast - 이미지 보내기
+
+**서버**
+
+```java
+import java.io.File;
+import java.io.FileOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class FileUnicastReceive {
+	DatagramSocket ds;
+	DatagramPacket dp;
+	FileOutputStream fos;
+	final int PORT = 4200;
+
+
+	public FileUnicastReceive() {
+		
+	}
+	public void receiveStart() {
+		try {
+			ds = new DatagramSocket(PORT);
+			byte[] receiveData = new byte[512];
+			dp = new DatagramPacket(receiveData, receiveData.length);
+			
+			
+			// 전송이 완료될때까지 반복실행
+			while(true) {
+				// 전송받기 대기
+				System.out.println("Waiting for message...");
+				ds.receive(dp); // 전송받기
+				
+				byte[] receive = dp.getData();
+				int byteCount = dp.getLength(); // 전송받은 byte수
+				
+				String receiveStr = new String(receive, 0, byteCount);
+				if(byteCount>=10 && receiveStr.substring(0, 10).equals("[*$@File&]")) { // 파일이 전송되었다. 
+					fos = new FileOutputStream(new File("/Users/myname/testfolder", receiveStr.substring(10)));
+					System.out.println("Created a file --->"+ receiveStr);
+				}else if(byteCount>=10 && receiveStr.equals("[*%&$end4]")) {
+					fos.close();
+					ds.close();
+					System.out.println("File saved...");
+					break;
+				}else { // 파일내용
+					fos.write(receive, 0, byteCount);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		new FileUnicastReceive().receiveStart();
+	}
+
+}
+
+```
+
+**Client**
+
+```java
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+public class FileUnicastSend {
+	DatagramSocket ds;
+	DatagramPacket dp;
+	InetAddress ia;
+	final int PORT = 4200;
+	
+	public FileUnicastSend() {
+		
+	}
+	public void sendStart() {
+		try {
+			ds = new DatagramSocket();
+			ia = InetAddress.getByName("172.30.1.41");
+			
+			// 파일의 내용을 byte 배열로 읽어와 보내기 위해 InputStream 객체를 생성한다. 
+			File f = new File("/Users/myname/img/01.jpeg");
+			FileInputStream fis = new FileInputStream(f);
+			
+			// 파일명을 전송
+			String sendFileName = "[*$@File&]" + f.getName(); // "[*$@File&]02/jfif"
+			dp = new DatagramPacket(sendFileName.getBytes(), 0, sendFileName.getBytes().length, ia, PORT);
+			ds.send(dp);
+			
+			// 파일내용읽어 전송
+			int cnt=0;
+			while(true) {
+				byte[] b = new byte[512];
+				int byteCount = fis.read(b, 0, b.length);
+				System.out.println(++cnt+", byte=" + byteCount);
+				if(byteCount<=0) break;
+				dp = new DatagramPacket(b, 0, byteCount, ia, PORT);
+				ds.send(dp);
+			}
+			
+			
+			// 전송을 완료...
+			String endMessage = "[*%&$end4]";
+			dp = new DatagramPacket(endMessage.getBytes(), 0, endMessage.getBytes().length, ia, PORT);
+			ds.send(dp);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		new FileUnicastSend().sendStart();
+
+	}
+
+}
+```
+
+
+
+### MultiSocket
+
