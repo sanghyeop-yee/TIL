@@ -53,6 +53,14 @@ public class TreeMapTest {
 
 
 
+### HashMap
+
+생성하는 방법:
+
+`Map<K, V> map = new HashMap<K,V>();`
+
+`// K 는 키 타입, V 는 값 타입`
+
 
 
 ## Object Compare
