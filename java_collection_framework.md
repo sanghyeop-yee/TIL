@@ -10,7 +10,9 @@
 
 > 컬렉션이란 쉽게말해 데이터를 담을수 있는 주머니로, 객체나 데이터들을 효율적으로 관리(추가, 삭제, 검색, 저장)하기 위해서 사용하는 라이브러리를 의미합니다.
 
+![image-20220616132618417](java_collection_framework.assets/image-20220616132618417.png)
 
+![image-20220616195247399](java_collection_framework.assets/image-20220616195247399.png)
 
 배열은 저장할 크기가 배열을 생성할 때 결정되어있어 배열의 크기가 넘어가면 저장이 불가능하죠. 
 또한 데이터를 삭제하면 해당 인덱스의 데이터는 비워있는 구조를 갖는 등 여러 문제점이 발생됩니다.
@@ -20,18 +22,11 @@
 이러한 문제점을 컬렉션 프레임워크를 통해서 해결이 가능합니다. 
 java.util 패키지에 Collection 과 Map 인터페이스가 있습니다.
 
-
-
 - Collection 인터페이스 상속받는 대표적인 인터페이스 List, Set
-  - List 을 구현하는 클래스들: ArrayList, Vector, LinkedList
-  - Set 을 구현하는 클래스들: HashSet, LinkedHashSet, TreeSet
+
 - Map 인터페이스를 상속받는 구현 클래스 HashMap, Hashtable, TreeMap
 
 
-
-![image-20220616132618417](java_collection_framework.assets/image-20220616132618417.png)
-
-![image-20220616195247399](java_collection_framework.assets/image-20220616195247399.png)
 
 ## List
 
@@ -45,22 +40,33 @@ java.util 패키지에 Collection 과 Map 인터페이스가 있습니다.
 
 `List<E> 객체명 = new ArrayList<E>([초기 저장용량]);`
 
-* <E> 는 제네릭 타입이며 생략시 Object 타입
-* Object 은 모든 데이터 타입 저장 가능. 데이터 추가 및 검색시 형변환 필요.
+`List<String> list = new ArrayList<String>();`
+
+* 초기 저장용량을 생략하면 기본적으로 10의 저장용량
+* <E> 는 제네릭 타입이며 생략시 Object 타입이 됩니다.
+* Object 은 모든 데이터 타입 저장 가능하지만 데이터 추가 및 검색시 형변환 필요합니다.
 
 
 
 ### Vector 
 
+ArrayList 와 동일한 구조를 갖지만 Vector 는 자동 동기화를 보장하여 멀티 스레드 환경에 적합합니다.
 
+`List<E> list = new Vector<e>([초기용량,</e> 증가용량]);`
+
+* 초기용량과 증가용량을 생략하면 기본 값인 0
 
 
 
 ### LinkedList
 
-FIFO (First-In First-Out) 은행 번호표같은 Queue 기능은 LinkedList 에 존재합니다.
+다른 리스트 컬렉션과 다르게 인덱스가 아닌 인접한 곳을 링크하여 체인처럼 관리합니다. 중간에 데이터를 추가/삭제하는 경우 처리 속도가 빠릅니다.
 
-양쪽에서 꺼내고 집어넣을수 있는 Deque 기능 역시 LinkedList 에 존재합니다.
+FIFO (First-In First-Out) 은행 번호표같은 Queue 기능은 LinkedList 에 존재합니다. 양쪽에서 꺼내고 집어넣을수 있는 Deque 기능 역시 LinkedList 에 존재합니다.
+
+`List<E> list = new LinkedList<E>();`
+
+
 
 
 
