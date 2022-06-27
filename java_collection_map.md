@@ -10,6 +10,10 @@
 
 ## Map Collection
 
+> `Map 컬렉션(Map<K, V>)`
+>
+> Key 와 Value 로 구성된 객체를 저장하는 구조이며 키는 중복으로 저장할 수 없고 값은 중복으로 저장할 수 있습니다.
+
 ![image-20220617094053991](/Users/sanghyeop/Library/Application Support/typora-user-images/image-20220617094053991.png)
 
 ### TreeMap
@@ -55,11 +59,11 @@ public class TreeMapTest {
 
 ### HashMap
 
-생성하는 방법:
+생성하는 방법입니다.
 
-`Map<K, V> map = new HashMap<K,V>();`
+`Map<K, V> map = new HashMap<K,V>(); // K 는 키 타입, V 는 값 타입`
 
-`// K 는 키 타입, V 는 값 타입`
+`Map<Integer, MemberVO> map = new HashMap<Integer, MemberVO>();`
 
 
 

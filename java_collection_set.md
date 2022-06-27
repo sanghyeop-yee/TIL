@@ -104,3 +104,9 @@ public class TreeSetTest {
 
 ```
 
+
+
+### LinkedHashSet
+
+중복된 데이터를 저장할 수 없으며, 입력된 순서대로 데이터를 관리합니다.
+
