@@ -214,3 +214,4 @@ alter table member drop column position;
 Book_tbl 의 FK -> author_tbl, pub_tbl 의 PK 로 1 to many 관계를 설정해줍니다.
 
 * CASCADE : 참조되는 테이블에서 record 가 지워지면 참조하는 테이블에서 record 를 지울것인지를 설정합니다.
+
