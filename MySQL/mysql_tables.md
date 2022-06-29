@@ -167,6 +167,7 @@ ALTER TABLE member ADD email varchar(50);
 ```mysql
 -- Syntax
 ALTER TABLE 테이블명 MODIFY 컬럼명 데이터타입;
+alter table member modity email varchar(50);
 -- 필드명 수정
 alter table member change tel phone varchar(20);
 ```
