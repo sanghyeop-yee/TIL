@@ -196,6 +196,8 @@ alter table member drop column position;
 
 
 
+
+
 ## 데이터베이스 모델링 EER Diagram
 
 > Menu: Database > Model > Add a diagram > Place a new table

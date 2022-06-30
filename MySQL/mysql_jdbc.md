@@ -15,27 +15,47 @@ MySQL 에서 multi 라는 데이터베이스를 만들었고 member 라는 테�
 
 
 
-0. Connector build path
+#### 0. Connector build path
 
-[MySQL Connector](https://dev.mysql.com/downloads/connector/j/) 다운받기 > OS: Platform Independent > 자바에서 프로젝트 생성 > 마우스 오른쪽 클릭 > Build Path > Configure Build Path > Classpath > Add External JAR
+[MySQL Connector](https://dev.mysql.com/downloads/connector/j/) 다운받기 > OS: Platform Independent (Mac) > 자바에서 프로젝트 생성 > 마우스 오른쪽 클릭 > Build Path > Configure Build Path > Classpath > Add External JAR
+
+
+
+#### 1. Driver 로딩
 
 | Modifier and Type | Method and Description                                       |
 | ----------------- | ------------------------------------------------------------ |
-| `static Class<?>` | `forName(String className)`Returns the `Class` object associated with the class or interface with the given string name. |
+| `static Class<?>` | `forName(String className)` Returns the `Class` object associated with the class or interface with the given string name. |
 
-1. Driver 로딩
+```java
+// 1. Driver 로딩
+// Class 클래스
+Class.forName("com.mysql.cj.jdbc.Driver");
+```
+
+
+
+#### 2. DB 연결 + DB 에 추가할 데이터 준비
 
 | Modifier and Type   | Method and Description                                       |
 | ------------------- | ------------------------------------------------------------ |
-| `static Connection` | `getConnection(String url, String user, String password)`Attempts to establish a connection to the given database URL. |
+| `static Connection` | `getConnection(String url, String user, String password)` Attempts to establish a connection to the given database URL. |
+
+```java
+// 2. DB 연결
+import java.sql.Connection;
+
+Connection conn=null;
+DriverManager.getConnection(URL, DB_ID, DB_PWD);
+
+// ip: 127.0.0.01	port:3306	database:multi
+			String url = "jdbc:mysql://@127.0.0.1/multi";
+			conn = DriverManager.getConnection(url, DriverManager.getConnection(URL, DB_ID, DB_PWD);
+```
 
 
 
-2. DB 연결 + DB 에 추가할 데이터 준비
-
-
-
-3. PrepareStatement 객체를 생성 (SQL 쿼리문으로)
+#### 3. PrepareStatement 객체 생성 (SQL 쿼리문으로)
 
 | Modifier and Type   | Method and Description                                       |
 | ------------------- | ------------------------------------------------------------ |
@@ -43,7 +63,7 @@ MySQL 에서 multi 라는 데이터베이스를 만들었고 member 라는 테�
 
 
 
-4. 실행
+#### 4. 실행
 
 | Modifier and Type | Method and Description                                       |
 | ----------------- | ------------------------------------------------------------ |
@@ -52,7 +72,7 @@ MySQL 에서 multi 라는 데이터베이스를 만들었고 member 라는 테�
 
 
 
-5. DB 연결 해제
+#### 5. DB 연결 해제
 
 
 
@@ -148,7 +168,7 @@ public class InsertTest {
 
 
 
-* ResultSet
+* 반복문으로 java.sql.ResultSet 안의 메소드 next() 이용해서 다음 데이터가 있을때까지 가져옵니다.
 
 | Modifier and Type | Method and Description                                       |
 | ----------------- | ------------------------------------------------------------ |
@@ -228,6 +248,64 @@ public class SelectTest {
 
 	}
 
+}
+
+```
+
+
+
+### DBConn
+
+데이터베이스에 연결시 각 클래스마다 중복되는 부분을 DBConn 클래스를 만들어서 상속시켜봅시다.
+
+```java
+package employeesOOP;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class DBConn {
+
+	// 드라이버로딩 메소드
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// 변수 
+	// protected 로 외부에서 사용 안되고 반드시 상속받아서 쓰게만 허용
+	protected Connection conn;
+	protected PreparedStatement pstmt;
+	protected ResultSet rs;
+	protected String sql = null;
+	protected final String URL = "jdbc:mysql://@127.0.0.1/multi";
+	protected final String DB_ID = "root";
+	protected final String DB_PWD = "password";
+	
+	// DB 연결 메소드
+	protected void getConn() {
+		try {
+			conn = DriverManager.getConnection(URL, DB_ID, DB_PWD);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// DB 닫기 메소드 
+	protected void getClose() {
+		try {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 ```
