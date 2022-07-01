@@ -46,7 +46,6 @@ Class.forName("com.mysql.cj.jdbc.Driver");
 import java.sql.Connection;
 
 Connection conn=null;
-DriverManager.getConnection(URL, DB_ID, DB_PWD);
 
 // ip: 127.0.0.01	port:3306	database:multi
 			String url = "jdbc:mysql://@127.0.0.1/multi";
@@ -61,9 +60,35 @@ DriverManager.getConnection(URL, DB_ID, DB_PWD);
 | ------------------- | ------------------------------------------------------------ |
 | `PreparedStatement` | `prepareStatement(String sql)`Creates a `PreparedStatement` object for sending parameterized SQL statements to the database. |
 
+```java
+// SQL 문 실행을 위한 객체 생성
+// 파라미터를 입력받아 동적인 쿼리문을 실행할 경우
+PreparedStatement pstmt = null;
+pstmt = conn.prepareStatement();
+```
 
 
-#### 4. 실행
+
+#### 4. SQL문 실행
+
+```java
+// executeUpdate()
+// insert, update, delete 등 리턴값이 필요없는 쿼리문일때
+pstmt.executeUpdate(sql);
+
+// executeQuery()
+// select 등 리턴값이 필요한 쿼리문일때
+pstmt.executeQuery(sql);
+
+// 쿼리실행 후 값을 받아올때
+ResultSet rs = null;
+rs = pstmt.executeQuery();
+while(rs.next()){
+  String name = rs.getString("name");
+}
+```
+
+
 
 | Modifier and Type | Method and Description                                       |
 | ----------------- | ------------------------------------------------------------ |
@@ -73,6 +98,13 @@ DriverManager.getConnection(URL, DB_ID, DB_PWD);
 
 
 #### 5. DB 연결 해제
+
+finally 블럭에서 close() 를 이용하여 리소스를 생성한 역순으로 반납합니다.
+
+```java
+conn.close();
+pstmt.clost();
+```
 
 
 
@@ -259,8 +291,6 @@ public class SelectTest {
 데이터베이스에 연결시 각 클래스마다 중복되는 부분을 DBConn 클래스를 만들어서 상속시켜봅시다.
 
 ```java
-package employeesOOP;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

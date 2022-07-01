@@ -10,9 +10,9 @@
 
 
 
-JDBC 를 이용하여 데이터베이스와 연결을 해보았고 DBConn, Select, Insert, Update, Class 를 각각의 클래스로 만들어서 사용해보았습니다. 
+JDBC 를 이용하여 데이터베이스와 연결을 해보았고 DBConn, Select, Insert, Update, Delete 를 각각의 클래스로 만들어서 사용해보았습니다. 
 
-이번에는 하나의 DAO 클래스에서 Select, Insert, Update, Class 를 메소드로 만들어서 구현해보겠습니다. 
+이번에는 하나의 DAO 클래스에서 Select, Insert, Update, Delete 를 메소드로 만들어서 구현해보겠습니다. 
 
 
 
@@ -26,7 +26,7 @@ DAO 에서 Select 를 실행하면 ResultSet 을 리턴해줍니다. 각각의 �
 2. DBConn 클래스 만들고 상속하기
    * 데이터베이스 연결시 사용
 3. EmpDAO 클래스에서 Select, Insert, Update, Class 메소드 생성
-   * 데이터베이스 연동, 사용시 사용
+   * 데이터베이스 연동하여 처리할때 사용
 4. EmpStart 클래스 생성
    * 변수를 가져올때 사용
      1. 메뉴 출력 메소드 생성
