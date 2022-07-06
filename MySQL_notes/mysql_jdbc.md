@@ -49,7 +49,7 @@ Connection conn=null;
 
 // ip: 127.0.0.01	port:3306	database:multi
 			String url = "jdbc:mysql://@127.0.0.1/multi";
-			conn = DriverManager.getConnection(url, DriverManager.getConnection(URL, DB_ID, DB_PWD);
+			conn = DriverManager.getConnection(URL, DB_ID, DB_PWD);
 ```
 
 

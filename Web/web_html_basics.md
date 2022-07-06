@@ -74,7 +74,7 @@ Eclipse > Dynamic Web Project 생성 > 프로젝트명: webApp > src > main > we
 
 
 
-## a tag
+## Tag
 
 ### a href : 링크
 
@@ -202,5 +202,219 @@ a 태그를 활용하여 링크와 연결하는 방법을 알아봅시다.
 </map>
 </body>
 </html>
+```
+
+
+
+### ol 태그 : 순서가 있는 목록 태그
+
+```html
+<ol type="I" style="background: yellow">
+	<li style="background:green"><b>Sunflower</b></li>
+	<li>Iris</li>
+	<li>Rose</li>
+</ol>
+```
+
+
+
+### ul 태그 : 순서가 없는 목록 태그 **
+
+가장 많이 사용되는 태그입니다.
+
+```html
+<!--
+	type 속성
+		disc (안이 채워진 원), circle (안이 비워진 원), square (안이 채워진 사각형)
+ -->
+<ul type="circle">
+	<li>HTML</li>
+	<li>CSS</li>
+	<li>JavaScript</li>
+	<li>Spring</li>
+	<li><img src="../img/02.png" width="200"></li>
+</ul>
+```
+
+
+
+### dl 태그 : 
+
+```html
+<dl>
+	<dt>html</dt>
+	<dd>hyper text markup language. hyper text markup language. hyper text markup language.</dd>
+	<dt>html</dt>
+	<dd>hyper text markup language. hyper text markup language. hyper text markup language.</dd>
+	<dt>html</dt>
+	<dd>hyper text markup language. hyper text markup language. hyper text markup language.</dd>
+</dl>
+```
+
+
+
+### table : 테이블 만들기
+
+```html
+<body>
+<table border="1" width="100%">
+	<caption><h1 style='color:red'>Schedule</h1></caption>
+	<colgroup>
+		<col style="color:blue"/>
+	</colgroup>
+	<tr height="50">
+		<th>Mon</th>
+		<th>Tue</th>
+		<th>Wed</th>
+	</tr>
+	<tr>
+		<td>JavaScript</td>
+		<td><img src="../img/02.png" width:"200"/></td>
+		<td>Java</td>
+	</tr>
+	<tr>
+		<td>Spring</td>
+		<td>Mybatic</td>
+		<td>MySQL</td>
+	</tr>
+	
+</table>
+
+</body>
+```
+
+
+
+### table: 행렬의 수가 다른 표만들기
+
+```html
+<body>
+	<h1>행렬의 수가 다른 표만들기</h1>
+	<!-- 
+		colspan : 칸을 합친다
+		rowspace : 줄을 합친다
+	 -->
+	<table border="1">
+		<tr>
+			<td>AAAAAA</td>
+			<td>BBBBBB</td>
+			<td colspan="2">CCCCCC</td>
+		</tr>
+		<tr>
+			<td colspan="2">DDDDDD</td>
+			<td>EEEEEE</td>
+			<td>FFFFFF</td>
+		</tr>
+		<tr>
+			<td>GGGGGG</td>
+			<td rowspan="2">HHHHHH</td>
+			<td rowspan="2">IIIIII</td>
+			<td>JJJJJJ</td>
+		</tr>
+		<tr>
+			<td>KKKKKK</td>
+			<td>LLLLLL</td>
+		</tr>
+	</table>
+
+</body>
+```
+
+
+
+### iframe 태그 이용하기
+
+```html
+<body>
+<h1>iframe 태그 이용하기</h1>
+<!--
+	src: 파일명
+	width, height
+	frameborder: 구분선 
+	scrolling : yes, no
+ -->
+<iframe src="https://www.nate.com" width="1300" height="300" frameborder="0"></iframe>
+<img src="../img/02.png" height="300"/>
+<iframe src="tag03_a_map.html" width="800" height="700" frameborder="0 scrolling="no"></iframe>
+</body>
+```
+
+
+
+### meta 태그 : 페이지 설명 기술하기
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="이페이지에 대한 설명"/>
+<meta name="keywords" content="컴퓨터, IT, AI"/>
+<meta name="author" content="hong gildong"/>
+<meta http-equiv="refresh" content="10"/>
+<meta http-equiv="Refresh" content="5; tag07_iframe.html"/>
+<title>Meta 태그</title>
+</head>
+<body>
+<h1>meta 태그</h1>
+<pre>
+	name 속성
+		description : 이 페이지에 대한 설명을 기술
+		keywords : 검색엔진에 검색되는 단어들...
+		author : 작성자
+	http-equiv 속성	
+		refresh : 새로고침
+		Refresh : 
+</pre>
+<img src="../img/02.png"/>
+</body>
+</html>
+```
+
+
+
+### Audio  태그
+
+```html
+<body>
+<h1>Audio 재생하기</h1>
+<pre>
+	src : 재생할 사운드파일
+	controls : 컨트롤 바 표시
+	autoplay : 자동재생
+	loop : 반복
+	preload : 전송완료 후 재
+</pre>
+<audio src="../audio_video/Kalimba.mp3" controls autoplay loop="2"></audio>
+
+<audio controls>
+	<source src="../audio_video/Kalimba.mp3" type="audio/mp3"/>
+	<source src="../audio_video/Kalimba.ogg" type="audio/ogg"/>
+</audio>
+<img src="../img/02.png"/>
+</body>
+```
+
+
+
+### Video 태그
+
+```html
+<title>Video</title>
+</head>
+<body>
+<h1>Video 재생하기</h1>
+<pre>
+	src : 재생할 사운드파일
+	controls : 컨트롤 바 표시
+	autoplay : 자동재생
+	loop : 반복
+	preload : 전송완료 후 재
+</pre>
+<video controls width="1000" autoplay poster="../img/01.JPG">
+	<source src="../audio_video/Wildlife.mp4"/>
+</video>
+</body>
+
 ```
 
