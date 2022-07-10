@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Daum 로그인</title>
+<style>
+#daumWrap{
+	max-width: 700px;
+	min-height: 100%;
+	margin: 0 auto;
+	background: #fff;
+	text-align: center;
+}
+html, body {
+	height: 100%;
+	min-height:100%;
+}
+body, input, th, td,
+select, textarea, button{
+	font-size: 12px;
+    line-height: 1.5;
+    font-family: 'Apple SD Gothic Neo','맑은 고딕','Malgun Gothic','돋움',dotum,sans-serif;
+    color: #767676;
+    letter-spacing: -1px;
+}
+.inner_head .link_daum{
+	display: block;
+	width: 142px;
+	height: 58px;
+	margin: 0 auto;
+	background: url(https://t1.daumcdn.net/id/logins/2021/retina/logo_daum.png) 0 0 no-repeat;
+	background-size: 142px 58px;
+}
+.ir_wa{
+	display: block;
+	overflow: hidden;
+	position: relative;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+}
+#mArticle{
+	position: relative;
+}
+.screen_out{
+	overflow: hidden;
+	position: absolute;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	text-indent: -9999px;
+}
+h1{
+	font-size: 2em;
+	font-weight: bold;
+}
+h2{
+	display: block;
+	font-size: 1.5em;
+}
+.section_login{
+	min-height: 402px;
+	padding-bottom: 20px;
+}
+.login_default{
+	max-width: 420px;
+	padding-top: 30px;
+	margin: 0 auto;
+}
+.login_default
+.login_change{
+	text-align: right;
+}
+.login_change
+.link_change{
+	display: inline-block;
+    height: 24px;
+    font-size: 16px;
+    color: #191919;
+    vertical-align: top;
+}
+form{
+	display: block;
+	margin-top: 0em;
+}
+fieldset, img{
+	border: 0 none;
+}
+.box_inp{
+	position: relative;
+	height: 46px;
+	margin-top: 8px;
+	border: 1px solid #d6d6d6;
+}
+label{
+	cursor: default;
+}
+.tf_g{
+	display: block;
+    width: 100%;
+    height: 46px;
+    padding: 10px 44px 6px 14px;
+    border: 0 none;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 30px;
+    color: #000;
+    background: transparent;
+    outline: 0;
+    box-sizing: border-box;
+    letter-spacing: 0;
+}
+.del_on
+.btn_del{
+	display: block;
+}
+.btn_del{
+	display:none;
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 46px;
+    height: 100%;
+}
+.btn_del
+.ico_del{
+	display: block;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    background-position: -150px 0;
+}
+.ico_login{
+	display: inline-block;
+    background: url(https://t1.daumcdn.net/id/logins/2021/retina/ico_login_220323.png) no-repeat 0 0;
+    background-size: 200px 100px;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+    vertical-align: top;
+}
+button {
+	border: 0 none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.btn_comm{
+	display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 56px;
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 58px;
+    color: #fff;
+    background: #4c87ee;
+    letter-spacing: 0;
+}
+.set_login{
+	position: relative;
+}
+.set_comm{
+	display: block;
+	overflow: hidden;
+}
+.set_comm
+.lab_check{
+	float: right;
+}
+.lab_check{
+	display: inline-block;
+    overflow: hidden;
+    position: static;
+    padding: 2px 0 0 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #555;
+    cursor: pointer;
+    vertical-align: top;
+    letter-spacing: -0.05em;
+}
+.check_g{
+	float: left;
+	position: relative;
+	width: 22px;
+	height: 22px;
+}
+.check_g
+.ico_login {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.ico_login{
+	display: inline-block;
+    background: url(//t1.daumcdn.net/id/logins/2021/retina/ico_login_220323.png) no-repeat 0 0;
+    background-size: 200px 100px;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+    vertical-align: top;
+}
+.layer_set{
+	display: none;
+    position: absolute;
+    left: 0;
+    top: 29px;
+    white-space: nowrap;
+}
+.layer_set
+.desc_set{
+	padding: 7px 12px 5px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #191919;
+    letter-spacing: 0;
+    text-align: left;
+    background-color: #f7f7f7;
+}
+.layer_set
+.ico_point{
+	position: absolute;
+    left: 64px;
+    top: -7px;
+    width: 10px;
+    height: 8px;
+    background-position: -60px -10px;
+}
+.set_security{
+	float: right;
+    position: relative;
+    margin: 14px 0 0 0;
+}
+.set_security
+.link_security{
+	float: left;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #555;
+    letter-spacing: -0.05em;
+}
+.set_security
+.inp_check{
+	top: 0;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: 32px;
+}
+.inp_check{
+	position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: .01;
+    -ms-filter: "alpha(opacity=1)";
+    cursor: pointer;
+}
+.login_default
+.login_rel
+.link_rel{
+	display: inline-block;
+    font-size: 16px;
+    color: #666;
+    vertical-align: top;
+    letter-spacing: -0.05em;
+}
+.login_default
+.login_rel
+.txt_bar{
+	display: inline-block;
+    width: 1px;
+    height: 16px;
+    margin: 3px 15px 0 18px;
+    background: #d6d6d6;
+    text-indent: -9999px;
+    vertical-align: top;
+}
+.box_bnr{
+	position: relative;
+    width: 420px;
+    height: 126px;
+    margin: 0 auto;
+}
+.box_bnr
+.link_bnr{
+	display: block;
+	height: 100%
+}
+.box_bnr img{
+	width: 100%;
+	height: auto;
+}
+#daumFoot{
+	overflow: hidden;
+    padding: 17px 0 97px;
+    margin-top: 44px;
+    border-top: 1px solid #ebebeb;
+    background: #fff;
+}
+.link_kcorp{
+	display: inline-block;
+    color: #7f7f7f;
+    vertical-align: top;
+    letter-spacing: -0.05em;
+}
+.link_custom{
+	display: inline-block;
+	color: #7f7f7f;
+	vertical-align: top;
+	letter-spacing: -0.05em;
+}
+
+.hide{
+	display: none;
+}
+</style>
+</head>
+
+
+<body class="type_size">
+	<div id="daumWrap">
+		<div id="daumHead">
+			<div class="inner_head">
+				<h1>
+					<a href="https://www.daum.net" id="daumLogo" class="link_daum" alt="Daum" name="Daum_첫화면">
+						<span class="ir_wa">DAUM</span>
+					</a>
+				</h1>
+			</div>
+		</div>
+		<hr class="hide">
+		<div id="daumContent" class="cont_daum" role="main">
+			<div id="mArticle">
+				<div class="section_login">
+					<div id="loginFormDiv" class="login_default">
+						<div class="login_change">
+							<a href="/accounts/loginform.do?url=https://www.daum.net" class="link_change">
+								다른 방법으로 로그인
+							</a>
+						</div>
+						<form novalidate id="loginForm" method="post" action="https://logins.daum.net/accounts/login.do">
+							<fieldset class="fld_comm">
+								<div class="box_inp del_on">
+									<input type="email" id="id" name="id" value class="tf_g" placeholder="아이디" required style="ime-mode:disabled;">
+									<button type="button" class="btn_del" tabindex="-1">
+										<span class="ico_login ico_del"></span>
+									</button>
+								</div>
+								<div class="box_inp">
+									<input type="password" id="inputPwd" name="pw" class="tf_g" maxlength="32" autocomplete="off" placeholder="비밀번호" style="ime-mode:disabled;">
+									<button type="button" class="btn_del" tabindex="-1">
+										<span class="ico_login ico_del"></span>
+									</button>
+								</div>
+								<button id="loginBtn" type="submit" class="btn_comm">
+								로그인
+								</button>
+								<div class="set_login">
+									<div class="group_set">
+										<span class="set_comm">
+											<label for="stln" class="lab_check">로그인 상태 유지</label>
+											<span class="check_g">
+												<input type="checkbox" id="stln" name="stln" value="1" class="inp_check">
+													<span class="ico_login ico_check"></span>
+											</span>
+										</span>
+										<div class="layer_set" style=" display:none "></div>
+											<p class="desc_set">개인정보 보호를 위해, 개인 기기에서만 사용해 주세요.</p>
+											<span class="ico_login ico_point"></span>
+									</div>
+									<span class="set_security ">
+										<a href="#none" id="linkSecurity" class="link_security" target="_blank">IP보안</a>
+										<input type="checkbox" id="ipSecurity" name="ipSecurity" class="inp_check" value="checked" checked="checked">
+										<label for="ipSecurity" class="ico_login lab_security">IP보안 설정 ON</label>
+									</span>
+								</div>
+							</fieldset>
+						</form>
+						<div class="login_rel">
+							<a href="https://member.daum.net/find/id.do" id="findID" class="link_rel" target="_blank">아이디 찾기</a>
+							<span class="txt_bar">|</span>
+							<a href="https://member.daum.net/find/password.do" id="findPw" class="link_rel" target="_blank">비밀번호 찾기</a>
+						</div>
+					</div>
+				</div>
+				<div class="box_bnr">
+					<a href="https://accounts.daum.net/integration/start?rtnUrl=https://www.daum.net?fromdac=pc_login_banner" target="_blank" class="link_bnr" style="background-color:#F0F0F0">
+						<img src="https://t1.kakaocdn.net/login/bridge/bnr_login.jpg" height=100% alt="광고">
+					</a>
+				</div>
+			</div>
+		</div>
+		<hr class="hide">
+		<div id="daumFoot">
+			<h2 class="screen_out">서비스 이용정보</h2>
+			<a href="http://www,kakaocorp.com/" class="link_kcorp" target="_blank">© Kakao Corp.</a>
+			<span class="txt_bar">|</span>
+			<a href="https://cs.daum.net/faq/59/14970.html" class="link_custom" target="_blank">고객센터</a>
+			
+		</div>
+	</div>
+</body>
+</html>
