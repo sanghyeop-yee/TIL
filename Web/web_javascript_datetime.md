@@ -12,6 +12,8 @@
 
 
 
+### Date/Time
+
 ```javascript
 <!DOCTYPE html>
 <html>
@@ -47,6 +49,105 @@
 <h1 id="now"></h1>
 <div id="result"></div>
 <div id="view"></div>
+</body>
+</html>
+```
+
+
+
+### Time Interval
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function setTimer(){
+		var now = new Date();
+		
+		var hour = now.getHours();
+		var minute = now.getMinutes();
+		var second = now.getSeconds();
+		
+		var nowTxt = "";
+		if(hour<10){
+			nowTxt += "0";
+		}
+		nowTxt += hour + ":";
+		
+		if(minute<10){
+			nowTxt += "0";
+		}
+		nowTxt += minute + ":";
+		if(second<10){
+			nowTxt += "0";
+		}
+		nowTxt += second;
+		
+		document.getElementById("clock").innerHTML = nowTxt;
+	}
+	var step=5;
+	var left=0;
+	function moveImage(){
+		var img = document.getElementById("i").style;
+		left = left + step;
+		img.left = left+"px";
+		if(left>500){
+			step = -5;
+		}
+		if(left<0){
+			step = 5;
+		}
+	}
+	var interval;
+
+</script>
+<style>
+	#i{width: 100px; height:100px; position:absolute; left:0px; top:0px;}
+</style>
+</head>
+<!-- 설정한 시간 간격으로 호출됨 : setInterval("호출할함수명", 밀리초); -->
+<!-- interval을 중지시킨다 : clearInterval() -->
+<body onload="interval = setInterval('moveImage()', 500); setInterval('setTimer()', 1000);">
+<img src="../img/02.png"/>
+<h1 id="clock"></h1>
+<img src="../img/01.JPG" id="i" onmouseover="clearInterval(interval)" 
+								onmouseout="interval=setInterval('moveImage()', 100)"/>
+</body>
+</html>
+```
+
+
+
+### SetTimeout
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+	var imgTag="";
+	function addImage(){
+		cnt++
+		imgTag += "<img src='../img/02.png' width='100'/>"
+		document.getElementById("imgView").innerHTML = imgTag;
+		// 재귀호출
+		setTimeout('addImage()', 1000);
+		if(cnt>10){
+			clearTimeout(timer); // 반복호출 중지
+		}
+	}
+	
+</script>
+</head>
+<body onload="addImage()">
+<h1>setTimeout 을 이용한 반복실행</h1>
+<div id="imgView"></div>
 </body>
 </html>
 ```
