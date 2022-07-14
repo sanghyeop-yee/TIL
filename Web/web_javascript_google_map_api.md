@@ -6,11 +6,13 @@
 
 [toc]
 
-구글 맵 API 를 활용해봅시다.
+구글 맵 API 를 활용해봅시다. Google 지도를 사용하기 위해선 Google 지도 API 키를 발급받아 내 사이트에 적용해야 합니다
 
 우선 [Google Maps Platform](https://console.cloud.google.com/google/maps-apis/overview?cloudshell=false&project=original-voyage-356300) 에서 API Key 를 받은후 개발을 위해 잠시 키 제한을 없음으로 설정해놓습니다.
 
 
+
+### googleMap.html
 
 ```javascript
 <!DOCTYPE html>
@@ -25,7 +27,7 @@
 	}
 </style>
 <!-- google 맵 라이브러리를 연결 -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCux6rjQfun1CNYlVIlw9Hzymutw_uA9bQ&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=[YOURAPI]&callback=initMap"></script>
 </head>
 <body>
 <div id="googleMapView"></div>
@@ -92,4 +94,10 @@
 </body>
 </html>
 ```
+
+
+
+### googleMapGeocode.html
+
+> 지오코딩은 주소(예: '1600 Amphitheatre Parkway, Mountain View, CA')를 지리적 좌표(예: 위도 37.423021, 경도 122.083739)로 변환하는 프로세스입니다. 이 지리적 좌표를 사용하여 위치 아이콘을 표시하거나 지도를 배치할 수 있습니다.
 
