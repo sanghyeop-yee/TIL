@@ -9,18 +9,46 @@
 jQuery 란?
 
 > JavaScript 로 만들어진 이벤트 기반 라이브러리 입니다.
+>
+> > - Element를 선택하기 쉽게 할 수 있습니다.
+> > - 선택된 Element들을 효율적으로 제어할 수 있습니다.
+> > - JavaScript로 만들어진 라이브러리입니다.
 
 
 
-CDN 방식
+[CDN](https://cdnjs.com/libraries/jquery) 방식으로 링크를 걸어서 jQuery 를 사용합니다. 
 
+이클립스에서 HTML 파일 생성시 기본코드를 템플릿이라고 합니다. JQuery 를 불러오는 코드로 템플릿을 만들어서 시작합니다. 
 
-
-기본코드를 템플릿이라고 합니다.
-
-Preference > Web > HTML Files > Editor > Templates > New HTML File (5) > Edit 으로 이동하여 Title 밑에 아래의 코드를 붙여넣습니다.
+`Eclipse Preference > Web > HTML Files > Editor > Templates > New HTML File (5) > Edit` 으로 이동하여 Title 밑에 아래의 코드를 붙여넣습니다.
 
 `<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>`
+
+
+
+### jQuery 의 문법
+
+* `$` 로 시작합니다.
+* 인자값으로 CSS selector 를 줄 수 있습니다.
+
+```javascript
+$(제어대상).method1().method2();
+주어.서술어
+```
+
+
+
+### jQuery Wrapper (엘리먼트 오브젝트)
+
+Wrapper 란 jQuery 라는 이름을 가지고 있는 함수를 호출하는 것입니다.
+그 인자로 `Element Object` 를 전달하거나 문자열로 된  `CSS Style Selector`를 전달합니다.
+
+* `Element Object`
+  * document.getElementById 로 인자를 전달하면 어떤 값을 return 해주는데 그 return 한 객체가 엘리먼트 오브젝트 입니다.
+* `CSS Style Selector` (CSS 스타일 선택자)
+  * ID Selector: #
+  * Class Selector: .
+  * Element Selector: 아무것도 붙어있지 않음.
 
 
 
