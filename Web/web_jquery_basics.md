@@ -38,6 +38,8 @@ $(제어대상).method1().method2();
 
 
 
+
+
 ### jQuery Wrapper (엘리먼트 오브젝트)
 
 Wrapper 란 jQuery 라는 이름을 가지고 있는 함수를 호출하는 것입니다.
