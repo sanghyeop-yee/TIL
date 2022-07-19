@@ -45,7 +45,7 @@
 		float:left; width:20%; height:50px; line-height:50px; text-align:center;
 	}
 	
-	.popMenu>li>li{
+	.popMenu>li>ul{
 		background-color:white; position:relative; display:none;
 	}
 	
@@ -94,7 +94,7 @@
 			</ul>
 		</li>
 		<li><a href="">BOTTOM</a>
-			<ul class="sub sub4">
+			<ul>
 				<li><a href='#'>레깅스</a></li>
 				<li><a href='#'>힐링두엘브</a></li>
 				<li><a href='#'>히든벤딩시리즈</a></li>
@@ -103,7 +103,7 @@
 			</ul>
 		</li>
 		<li><a href="">SUMMER</a>
-			<ul class="sub sub5">
+			<ul>
 				<li><a href='#'>HOLI스윕웨어</a></li>
 				<li><a href='#'>At 22°C</a></li>
 			</ul>
