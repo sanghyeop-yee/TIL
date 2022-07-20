@@ -1,4 +1,4 @@
-# JSP
+# JSP : Request
 
 > Tue Jul 19, 2022
 
@@ -135,15 +135,32 @@ tel : <%=tel %>
 <body>
 <h1>폼을 이용한 서버로 데이터 보내기</h1>
 <form method="post" action="formOk.jsp">
-	Id : <input type="text" name="userid"/><br/>
+	Id : <input type="text" name="userid" value="goguma" disabled/><br/>
 	Password : <input type="password" name="userpwd"/><br/>
 	Name : <input type="text" name="username"/><br/>
-	
+	Agreement: <input type="radio" name="state" value="Ok"/>동의함
+			   <input type="radio" name="state" value="No"/>동의안함<br/>
+	Hobby : <input type="checkbox" name="hobby" value="농구"/>농구
+			<input type="checkbox" name="hobby" value="야구"/>야구
+			<input type="checkbox" name="hobby" value="배구"/>배구
+			<input type="checkbox" name="hobby" value="탁구"/>탁구
+			<input type="checkbox" name="hobby" value="족구"/>족구
+			<input type="checkbox" name="hobby" value="축구"/>축구
+	Tel : 
+			<select name="tel1">
+				<option>010</option>
+				<option>02</option>
+				<option>031</option>
+				<option>032</option>
+				<option>041</option>
+			</select> -
+			<input type="text" name="tel2"/> -
+			<input type="text" name="tel3"/><br/>
+	<input type="hidden" name="num1" value="1234"/>
 	<input type="submit" value="전송"/>
 </form>
 </body>
 </html>
-
 ```
 
 
@@ -151,7 +168,9 @@ tel : <%=tel %>
 ### formOk.jsp
 
 ```jsp
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Arrays" %>
 
 <%
 	// post 방식의 전송일때 한글을 인코딩해준다.
@@ -160,6 +179,14 @@ tel : <%=tel %>
 	String userid = request.getParameter("userid");
 	String userpwd = request.getParameter("userpwd");
 	String username = request.getParameter("username");
+	String state = request.getParameter("state");
+	// 하나변수에 값이 여러개일때
+	String[] hobby = request.getParameterValues("hobby");
+	// 전화번호
+	String tel1 = request.getParameter("tel1");
+	String tel2 = request.getParameter("tel2");
+	String tel3 = request.getParameter("tel3");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -171,9 +198,39 @@ tel : <%=tel %>
 Id : <%=userid %><br/>
 Password : <%=userpwd %><br/>
 Name : <%=username %><br/>
+Agreement : <%=state %><br/>
+Hobby : <%=Arrays.toString(hobby) %><br/>
+Tel : <%=tel1+"-"+tel2+"-"+tel3 %><br/>
+Tel : <%=tel1 %>-<%=tel2 %>-<%=tel3 %><br/>
+<%-- 번호 : <%=num1 %> --%>
+
 <%
 	System.out.println(username);
 %>
+<hr/>
+<ul>
+<%
+	// 폼의 name 들을 구한다.
+	Enumeration<String> nameList = request.getParameterNames();
+	while(nameList.hasMoreElements()){
+		%>
+			<li><%=nameList.nextElement() %></li>
+		<%
+	}
+%>
+</ul>
+<ol>
+	<li>접속자의 컴퓨터 ip : <%=request.getRemoteAddr() %></li>
+	<li>인코딩 코드값 : <%=request.getCharacterEncoding() %></li>
+	<li>contentType : <%=request.getContentType() %></li>
+	<li>protocol : <%=request.getProtocol() %></li>
+	<li>URI : <%=request.getRequestURI() %></li>
+	<li>ContextPath : <%=request.getContextPath() %></li>
+	<li>서버이름 : <%=request.getServerName() %></li>
+	<li>포트 : <%=request.getServerPort() %></li>
+	<li>절대주소 : <%=request.getServletContext().getRealPath("/") %>
+	
+</ol>
 </body>
 </html>
 ```
