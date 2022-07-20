@@ -12,6 +12,21 @@ Document 는 body tag 와 동일하다 보셔도 무방합니다.
 
 
 
+### Variable
+
+자바스크립트에서 변수를 선언하는 방법은 `var 변수명 = 데이터;` 으로 작성합니다. 문자열의 데이터를 저장할때는 "",'' 사이에 데이터를 입력하고 숫자 데이터를 저장할때는 숫자만 입력합니다.
+
+```javascript
+<body>
+	<script>
+		var str1 = 'hello';
+		document.write(str1); // 웹브라우저에 데이터 출력
+	</script>
+</body>
+```
+
+
+
 ### Function
 
 함수는 호출하여야 실행됩니다. 아래의 Syntax 를 가집니다.

@@ -10,13 +10,43 @@
 
 Ajax는 JavaScript의 라이브러리중 하나이며 Asynchronous Javascript And Xml(비동기식 자바스크립트와 xml)의 약자입니다. 브라우저가 가지고있는 XMLHttpRequest 객체를 이용해서 전체 페이지를 새로 고치지 않고도 페이지의 일부만을 위한 데이터를 로드하는 기법 이며 Ajax를 한마디로 정의하자면 JavaScript를 사용한 비동기 통신, 클라이언트와 서버간에 XML 데이터를 주고받는 기술이라고 할 수 있겠습니다.
 
+일반적인 ajax 방법은 다음과 같습니다.
+
+```javascript
+$.ajax({
+	url: '', // Controller의 mapping값
+	type: '',  // get, post 방식 中
+	data: '',  // Controller로 보낼 데이터
+	contentType: '',  // 보내는 data의 타입
+	dataType: '', // 받을 데이터 타입
+	success: function() {},  // 정상적으로 return 받았을 때 실행할 함수
+	error: function(){} // 실패했을 때 작동할 함수
+});
+```
+
 
 
 ajax 를 통해서 text, json, xml 문서를 가져오는 방법을 배워봅시다.
 
 
 
-### XMLHttpRequest
+### TEXT 가져오기
+
+#### abcd.txt
+
+```javascript
+<img src='/webApp/img/sf01.jpeg'/><br/>
+<h2>AJAX란,</h2> JavaScript의 라이브러리중 하나이며 <i>Asynchronous Javascript And Xml(비동기식 자바스크립트와 xml)</i>의 약자이다. 
+브라우저가 가지고있는 <b>XMLHttpRequest</b> 객체를 이용해서 전체 페이지를 새로 고치지 않고도 페이지의 일부만을 위한 데이터를 
+로드하는 기법 이며 JavaScript를 사용한 비동기 통신, 클라이언트와 서버간에 XML 데이터를 주고받는 기술이다.
+즉, 쉽게 말하자면 자바스크립트를 통해서 서버에 데이터를 요청하는 것이다.
+```
+
+
+
+#### XMLHttpRequest.html (자바스크립트 활용)
+
+>  XMLHttpRequest : Ajax 처리를 하는 자바스크립트 내장객체 입니다.
 
 ```javascript
 <!DOCTYPE html>
@@ -71,7 +101,40 @@ ajax 를 통해서 text, json, xml 문서를 가져오는 방법을 배워봅시
 
 
 
-### ajax_data.json
+#### jq_ajax01_test.html (jQuery 활용)
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#result>button").click(function(){
+			// 서버에서 abcd.txt 파일의 내용을 가져오기
+			//				 파일명
+			$("#result").load("abcd.txt");
+		});
+	});
+</script>
+</head>
+<body>
+<h1>jquery에서 ajax처리(text)</h1>
+<div id="result" style="background:#ddd;"></div>
+	<button>클릭하시면 비동기식으로 text파일의 내용을 가져옴.</button>
+</body>
+</html>
+```
+
+
+
+
+
+### JSON 가져오기
+
+#### ajax_data.json
 
 ```javascript
 {
@@ -88,7 +151,7 @@ ajax 를 통해서 text, json, xml 문서를 가져오는 방법을 배워봅시
 
 
 
-### ajax_json.html
+#### ajax_json.html
 
 ```javascript
 <!DOCTYPE html>
@@ -135,11 +198,124 @@ ajax 를 통해서 text, json, xml 문서를 가져오는 방법을 배워봅시
 
 
 
-### XML
+### XML 가져오기 
+
+> XML (Extensible Markup Language) : 데이터를 저장하고 전달할 목적으로 만들어졌으며, 저장되는 데이터의 구조를 기술하기 위한 언어입니다
+
+
+
+#### ajax_data.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jusorok>
+	<row>
+		<username>John</username>
+		<tel>650-404-4005</tel>
+		<addr>520 21st</addr>
+	</row>
+	<row>
+		<username>MJ</username>
+		<tel>600-500-0000</tel>
+		<addr>500 21st</addr>
+	</row>
+	<row>
+		<username>Jono</username>
+		<tel>600-500-1111</tel>
+		<addr>500 22st</addr>
+	</row>
+	<row>
+		<username>Andrew</username>
+		<tel>600-500-2222</tel>
+		<addr>500 23st</addr>
+	</row>
+	<row>
+		<username>Kaycee</username>
+		<tel>600-500-4444</tel>
+		<addr>500 25st</addr>
+	</row>
+</jusorok>
+```
+
+
 
 #### RSS 이란?
 
 그 사이트를 직접 방문하지 않고, 새 기사들만 자신의 컴퓨터로 "배달"된다면 편리하겠죠? 새 기사들의 제목만, 또는 새 기사들 전체를 뽑아서 하나의 파일로 만들어 놓은 것입니다. 새로운 읽을거리가 자주 올라오는 "뉴스형", "블로그형" 사이트에서 주로 제공됩니다. 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+	<channel>
+		<title>
+<![CDATA[ 조선일보 ]]>
+		</title>
+		<link>https://www.chosun.com</link>
+		<atom:link
+			href="https://www.chosun.com/arc/outboundfeeds/rss/" rel="self"
+			type="application/rss+xml" />
+		<description>
+<![CDATA[ 1등 인터넷뉴스 조선닷컴 | 전체기사 ]]>
+		</description>
+		<lastBuildDate>Tue, 19 Jul 2022 04:28:19 +0000</lastBuildDate>
+		<language>ko</language>
+		<category>news</category>
+		<ttl>1</ttl>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+		<image>
+			<url>https://www.chosun.com/resizer/tMofBBp8RA5HaB4tbxnftjdS9qA=/image.chosun.com/cs_logo.png</url>
+			<title>조선일보</title>
+			<link>https://www.chosun.com</link>
+		</image>
+		<item>
+			<title>
+<![CDATA[ 與 “이재명도 시험 없이 비서관 채용, 사적채용 공세는 내로남불” ]]>
+			</title>
+			<link>https://www.chosun.com/politics/politics_general/2022/07/19/VQXZLMP6WZCIJG7QOX67J7NUM4/</link>
+			<guid isPermaLink="true">https://www.chosun.com/politics/politics_general/2022/07/19/VQXZLMP6WZCIJG7QOX67J7NUM4/</guid>
+			<dc:creator>
+<![CDATA[ 김명진 기자 ]]>
+			</dc:creator>
+			<description />
+			<pubDate>Tue, 19 Jul 2022 03:42:00 +0000</pubDate>
+			<content:encoded>
+<![CDATA[ <p>국민의힘 의원들이 19일 대통령실 사적 채용 논란과 관련해 야당에서 연일 공세를 벌이는 것을 두고 반박에 나섰다. 더불어민주당 이재명 의원이 경기도지사 시절 기용한 별정직 공무원 채용 사례, 문재인 정권의 청와대 직원 채용 사례 등을 거론하며 “그럴 듯한 프레임을 씌운 내로남불 공세”라고 맞받았다.</p><img src="https://www.chosun.com/resizer/0VInrfiB2idhziyoINZCuhBB-H8=/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/F3FSXLMU22T5WMFYXXKPDQYEVY.jpg" alt="김기현 국민의힘 의원이 12일 서울 여의도 국회 의원회관에서 열린 위기를 넘어 미래로, 민·당·정 토론회에서 인사말을 하고 있다. /뉴스1" height="2970" width="4098"/> ]]>
+			</content:encoded>
+		</item>
+		<item>
+			<title>
+<![CDATA[ "커브 좋다. 기대 된다" SSG 새 외국인 투수 베일 벗었다 ]]>
+			</title>
+			<link>https://www.chosun.com/sports/sports_photo/2022/07/19/O7OGHV4SBYORKGO773TOTNBLBA/</link>
+			<guid isPermaLink="true">https://www.chosun.com/sports/sports_photo/2022/07/19/O7OGHV4SBYORKGO773TOTNBLBA/</guid>
+			<dc:creator>
+<![CDATA[ 스포츠조선 = 나유리 기자 ]]>
+			</dc:creator>
+			<description>
+<![CDATA[ [스포츠조선 나유리 기자]SSG 랜더스의 새 외국인 투수 숀 모리만도가 베일을 벗었다. 모리만도는 19일 인천 SSG랜더스필드에서 열린 파주 챌린저스와의 연습 경기에 선발 등판했다. 모리만도는 SSG가 이반 노바를 퇴출한 후 영입한 대체 외국인 투수다. 노바가 부상과 부진 등의 이유로 3승4패 평균자책점 6.50의 성적을 기록한 이후 팀을 떠났고, 대체 선 ]]>
+			</description>
+			<pubDate>Tue, 19 Jul 2022 04:26:38 +0000</pubDate>
+			<content:encoded>
+<![CDATA[ <img src="https://www.chosun.com/resizer/XWM4wgrBPVQmDmmECbmPuHc2Zs8=/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/VROGAQ6GHPTV5A6MPWERDMH5YI.jpg" alt="SSG와 계약한 숀 모리만도. 사진제공=SSG 랜더스" height="683" width="640"/><p>[스포츠조선 나유리 기자]SSG 랜더스의 새 외국인 투수 숀 모리만도가 베일을 벗었다.</p> ]]>
+			</content:encoded>
+			<media:content
+				url="https://www.chosun.com/resizer/XWM4wgrBPVQmDmmECbmPuHc2Zs8=/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/VROGAQ6GHPTV5A6MPWERDMH5YI.jpg"
+				type="image/jpeg" height="683" width="640">
+				<media:description type="plain">
+<![CDATA[ SSG와 계약한 숀 모리만도. 사진제공=SSG 랜더스 ]]>
+				</media:description>
+			</media:content>
+		</item>
+```
+
+
+
+#### jq_ajax03_xml.html
 
 ```javascript
 <!DOCTYPE html>
