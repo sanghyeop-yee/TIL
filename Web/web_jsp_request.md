@@ -6,9 +6,15 @@
 
 [toc]
 
+## JSP 란?
+
 JSP 는 웹에서 무슨 역할을 할까요?
 
-> JSP 란 JavaServer Pages 의 약자이며 HTML 코드에 JAVA 코드를 넣어 동적웹페이지를 생성하는 웹어플리케이션 도구입니다. JSP 가 실행되면 자바 서블릿(Servlet) 으로 변환되며 웹 어플리케이션 서버에서 동작되면서 필요한 기능을 수행하고 그렇게 생성된 데이터를 웹페이지와 함께 클라이언트로 응답한다.
+> JSP 란 JavaServer Pages 의 약자이며 HTML 코드에 JAVA 코드를 넣어 동적웹페이지를 생성하는 웹어플리케이션 도구입니다. JSP 가 실행되면 자바 서블릿(Servlet) 으로 변환되며 웹 어플리케이션 서버에서 동작되면서 필요한 기능을 수행하고 그렇게 생성된 데이터를 웹페이지와 함께 클라이언트로 응답합니다.
+
+
+
+JSP 를 사용하기 위해서는 JSP 의 기반인 Java 설치 후 JSP를 실행(JSP 코드 해석, 서블릿 변환 등)하기 위한 서블릿 컨테이너(톰캣 등) 설치가 필요합니다. 
 
 
 
@@ -18,19 +24,30 @@ JSP 는 웹에서 무슨 역할을 할까요?
 
 
 
-Calendar 같은 패키지를 가져오기 위해서는 맨위의 지시부에 표시합니다.
+### 지시부 (디렉티브) : <%@ %> 
+
+디렉티브의 종류에는 page, include, taglib 이 있습니다. page 는 JSP 페이지에 대한 전체적인 속성 (errorPage, contentType, Import 등) 을 지정할때, include 지시어는 현재 페이지에 다른 페이지 (JSP, HTML)를 포함시킬때 사용됩니다.
+
+Calendar 같은 패키지를 가져올때도 맨위의 지시부에 표시합니다. 
 
 ```javascript
+<!-- 지시부 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Calendar, java.io.FileReader"%>
-<%@ page import="java.util.Scanner" %>
+<%@ page import="java.util.Calendar, java.io.FileReader"%> 
+<%@ page isErrorPage="true" %>
 ```
 
 
 
-클라이언트에서 웹서버를 불러오면 jsp 부분은 웹서버내에서 실행, html 은 클라이언트로 불러오게 됩니다. 클라이언트에 보여질 내용이 있다면 `out.print("c="+c);` 이런식으로 작성합니다.
+### 스크립 (Script)
 
+JSP 페이지 내에서 문서의 내용을 동적으로 생성하기 위해 사용되는 것을 의미합니다.
 
+클라이언트에서 웹서버를 불러오면 jsp 부분은 웹서버내에서 실행되고html 은 클라이언트로 불러오게 됩니다. 클라이언트에 보여질 내용이 있다면 `out.print("c="+c);` 이런식으로 작성합니다.
+
+#### 스크립틀릿 (Scriptlet) : <% %>
+
+자바 코드를 작성하거나, JSP 코드를 실행하는 등 가장 많이 사용되는 태그 중에 하나인 코드 블록입니다.
 
 ```jsp
 <% 
@@ -50,10 +67,19 @@ Calendar 같은 패키지를 가져오기 위해서는 맨위의 지시부에 �
 
 
 
-메소드를 만들어서 호출하고 싶다면 페이지 상단 선언부에 표시합니다.
+#### 표현식 (Expression) : <%= %>
+
+값을 출력할때 사용하는 태그로 변수의 값이나 매서드의  호출 결과를 출력합니다. 주로 값을 출력 결과에 포함시킬때 사용합니다.
+
+
+
+#### 선언부 (Declaration) : <%! %>
+
+메소드를 만들어서 호출하고 싶다면 페이지 상단 선언부에 표시합니다. 선언부에서 정의된 메서드 및 변수는 전역의 의미를 갖습니다. (많이 사용되지않음)
 
 ```jsp
-<%! // 선언부
+<!-- 선언부 -->
+<%!
 	// 메소드나 변수를 선언하는 영역
 	public String gugudan(int dan){
 		String tag = "<ul>";
@@ -69,6 +95,24 @@ Calendar 같은 패키지를 가져오기 위해서는 맨위의 지시부에 �
 	out.print(gugudan(7));
 %>
 ```
+
+
+
+
+
+### request 내장객체의 주요 기능
+
+JSP 의 내장객체 중 가장 많이 사용되는 request 객체에 대해 알아봅니다. request 객체는 웹브라우저를 통해 서버에 요청된 정보를 관리(저장) 하는 객체입니다. 
+
+request는 javax.servlet.http.HttpServletRequest의 객체이며 HttpServletRequst는 javax.servlet.ServletRequest를 상속받습니다. 따라서 request 객체는 httpServletRequest나 ServletRequest의 메서드를 사용합니다. [java EE API 사이트](https://docs.oracle.com/javaee/7/api/)
+
+* 웹브라우저 / 서버의 정보를 가져오기
+
+![image-20220720225347214](web_jsp.assets/image-20220720225347214.png)
+
+* 클라이언트의 요청과 관련된 정보 (주로 HTML form 태그를 통해 전달된 값을 가져옴) 등을 처리하기**
+
+![image-20220720225530981](web_jsp.assets/image-20220720225530981.png)
 
 
 

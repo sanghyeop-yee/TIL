@@ -14,7 +14,7 @@
 
 
 
-### login.jsp
+### login.jsp : 로그인폼 입력하기
 
 ```jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -38,7 +38,7 @@
 
 
 
-### loginOk.jsp
+### loginOk.jsp : DB 조회하여 이동시키기
 
 ```jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

@@ -18,7 +18,7 @@ Cookie 란?
 
 JSP 의 경우 서버에서 실행하여 클라이언트로 보여지기 때문에 response 를 사용합니다.
 
-Cookie 클래스를 객체로 만들어 response 를 이용하여 클라이언트 컴퓨터에 정보를 보낸다. 
+Cookie 클래스를 객체로 만들어 response 를 이용하여 클라이언트 컴퓨터에 정보를 보냅니다.
 
 
 
@@ -47,8 +47,12 @@ Cookie 클래스를 객체로 만들어 response 를 이용하여 클라이언�
 	response.addCookie(cookie2);
 %>
 </head>
+<script>
+	document.cookie = "notice=true";
+	document.cookie = "test=cookie";
+</script>
 <body>
-<h1><a href="">쿠키확인하기</a></h1>
+<h1><a href="/webJSP/jsp03_cookie/cookieView.jsp">쿠키확인하기</a></h1>
 
 </body>
 </html>
