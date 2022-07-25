@@ -6,6 +6,14 @@
 
 [toc]
 
+webServlet 프로젝트를 새로 만듭니다.
+
+Servlet 를 이용하여 로그인 페이지를 만들어봅시다.
+
+MySQL 데이터베이스와 연동을 하기때문에 WEB-INF>lib 폴더에 mysql-connector-java-8.0.29.jar 파일을 붙여넣습니다.
+
+
+
 ### web.xml
 
 ```xml
