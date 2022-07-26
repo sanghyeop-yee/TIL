@@ -1,3 +1,5 @@
+# 로그인
+
 
 
 
@@ -138,4 +140,55 @@ MemberDAO, MemberService interface 를 생성하고 MemberServiceImp 클래스�
 MemberMapper.xml 을 생성합니다.
 
 
+
+
+
+---
+
+webapp> Inc 폴더 생성 후 jspf 파일을 생성합니다. Servlet-context.xml 에 inc 폴더의 위치를 추가해줍니다.
+
+```xml
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/inc/**" location="/inc/" />
+```
+
+
+
+#### top.jspf
+
+
+
+#### bottom.jspf
+
+
+
+#### style.css
+
+
+
+web.xml 에 include 로 추가해줍니다.
+
+```xml
+	<!-- include -->
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<include-prelude>/inc/top.jspf</include-prelude>
+			<include-coda>/inc/bottom.jspf</include-coda>
+		</jsp-property-group>
+	</jsp-config>
+```
+
+
+
+
+
+
+
+memberController.java 에 추가합니다.
+
+
+
+유효성 검사까지 마쳤으니 이제 DB 작업을 실행합니다.
 
