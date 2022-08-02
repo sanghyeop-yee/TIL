@@ -64,3 +64,193 @@ implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 
 
 pom.xml 을 저장만해도 자동으로 다운이 되지만 build.gradle 을 마우스 오른쪽을 눌러서 Gradle > Refresh Gradle Project 를 눌러줘야 다운이 됩니다.
+
+
+
+
+
+----
+
+이번에는 insert 문을 구현해봅니다.
+
+
+
+---
+
+Board 를 만들어봅시다.
+
+Views > board 폴더 생성 후 com.cali.myapp 에 각각의 패키지를 생성합니다. 
+
+BoardVO.java 를 생성합니다.
+
+```java
+package com.cali.myapp.vo;
+
+public class BoardVO {
+	private int no;
+	private String subject;
+	private String content;
+	private String userid;
+	private String ip;
+	private int hit;
+	private String writedate;
+	
+	@Override
+	public String toString() {
+		return "BoardVO [no=" + no + ", subject=" + subject + ", content=" + content + ", userid=" + userid + ", ip="
+				+ ip + ", hit=" + hit + ", writedate=" + writedate + "]";
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
+	public String getWritedate() {
+		return writedate;
+	}
+
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	
+	
+}
+
+```
+
+
+
+BoardDAO.java 를 작성합니다.
+
+```java
+package com.cali.myapp.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import com.cali.myapp.vo.BoardVO;
+
+@Mapper
+@Repository
+public interface BoardDAO {
+	// 글목록
+	public List<BoardVO> boardList();
+	// 글등록
+	public int boardWriteOk(BoardVO vo);
+	// 글선택(글수정), 글내용보기
+	public BoardVO getBoard(int no);
+	// 글수정
+	public int boardEditOk(BoardVO vo);
+	// 글삭제
+	public int boardDel(int no, String userid);
+	// 조회수
+	public void hitCount(int no);
+}
+
+```
+
+
+
+BoardDAO 에 있는 내용을 BoardService 에 옮겨줍니다. 저장하고 나서 BoardServiceImpl 로 가서 @Override 해줍니다.
+
+```java
+package com.cali.myapp.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cali.myapp.dao.BoardDAO;
+import com.cali.myapp.vo.BoardVO;
+
+@Service
+public class BoardServiceImpl implements BoardService {
+	@Autowired
+	BoardDAO dao;
+
+	@Override
+	public List<BoardVO> boardList() {
+		return dao.boardList();
+	}
+
+	@Override
+	public int boardWriteOk(BoardVO vo) {
+		return dao.boardWriteOk(vo);
+	}
+
+	@Override
+	public BoardVO getBoard(int no) {
+		return dao.getBoard(no);
+	}
+
+	@Override
+	public int boardEditOk(BoardVO vo) {
+		return dao.boardEditOk(vo);
+	}
+
+	@Override
+	public int boardDel(int no, String userid) {
+		return dao.boardDel(no, userid);
+	}
+
+	@Override
+	public void hitCount(int no) {
+		dao.hitCount(no);
+	}
+
+}
+
+```
+
+
+
+Top.jspf > boardController > boardMapper 순으로 작성합니다.
+
+다음으로 board 폴더 아래에 boardList.jsp 파일을 하나 만들고 코드를 작성합니다. 
