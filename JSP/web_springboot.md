@@ -254,3 +254,6 @@ public class BoardServiceImpl implements BoardService {
 Top.jspf > boardController > boardMapper 순으로 작성합니다.
 
 다음으로 board 폴더 아래에 boardList.jsp 파일을 하나 만들고 코드를 작성합니다. 
+
+
+
