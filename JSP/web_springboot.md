@@ -1,4 +1,4 @@
-# Springboot
+# Springboot: 프로젝트 셋업
 
 > Fri Jul 29, 2022
 
@@ -20,31 +20,34 @@ Mybatis (xml) > DAO > Controller > Service > VO > Views (.jsp) 의 구조는 동
 
 SpringBoot 를 다운받고 Create new Spring Starter Project 를 생성합니다. 
 
-Project Name: bootMybatisMysql
-Type: Gradle Project 
-Packaging: War
-Java Version: 11
-Group: com.cali
-Package: com.cali.myapp
+> Project Name: bootMybatisMysql
+> Type: Gradle Project 
+> Packaging: War
+> Java Version: 11
+> Group: com.cali
+> Package: com.cali.myapp
 
 다음으로 넘어가서 아래를 선택해줍니다.
 
-New Spring Starter Project Dependencies
+> New Spring Starter Project Dependencies
+>
+> * Developer Tools: 
+>   * Spring Boot DevTools, Lombok
+> * SQL:
+>   * JDBC API
+>   * MyBatis Framework
+>   * MySQL Driver
+> * Web:
+>   * Spring Web
 
-* Developer Tools: 
-  * Spring Boot DevTools, Lombok
-* SQL:
-  * JDBC API
-  * MyBatis Framework
-  * MySQL Driver
-* Web:
-  * Spring Web
+
 
 
 
 src>main 에 webapp > WEB-INF > views 폴더를 새로 만듭니다.
 
-뷰를 jsp로 사용하기 위해서 프레임워크를 추가해야합니다. 메이븐저장소 > tomcat embed jasper > 9.0.58 > Gradle (Short) > 복사하여 build.gradle 을 열어 붙여넣습니다. 
+뷰를 jsp로 사용하기 위해서 프레임워크를 추가해야합니다. 
+메이븐저장소 > tomcat embed jasper > 9.0.58 > Gradle (Short) > 복사하여 build.gradle 을 열어 붙여넣습니다. 
 
 추가로 JSTL, Inject (자동으로 객체 만들어줌) 을 검색해서 추가합니다.
 
@@ -61,9 +64,39 @@ implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 
 ```
 
+pom.xml 은 저장만해도 자동으로 다운이 되지만 build.gradle 을 마우스 오른쪽을 눌러서 Gradle > Refresh Gradle Project 를 눌러줘야 다운이 됩니다.
 
 
-pom.xml 을 저장만해도 자동으로 다운이 되지만 build.gradle 을 마우스 오른쪽을 눌러서 Gradle > Refresh Gradle Project 를 눌러줘야 다운이 됩니다.
+
+---
+
+src/main/resources 에 application.yml 을 하나 만듭니다. 이는 계층 적 구성 데이터를 지정하기위한 편리한 형식이며 DB 등의 정보를 이곳에서 관리 할 것입니다.
+
+
+
+이어서 com.cali.myapp > ServletInitializer.java 에 코드를 추가합니다. 
+
+> 왜 사용하나요?
+>
+> ​	
+
+
+
+
+
+---
+
+우선은 뷰페이지에 화면을 띄우기위해 기본적인 index.jsp, top.jspf, bottom.jspf 를 작성해보겠습니다. 
+
+
+
+
+
+---
+
+Top.jspf > boardController > boardMapper 순으로 작성합니다.
+
+다음으로 board 폴더 아래에 boardList.jsp 파일을 하나 만들고 코드를 작성합니다. 
 
 
 
@@ -250,10 +283,6 @@ public class BoardServiceImpl implements BoardService {
 ```
 
 
-
-Top.jspf > boardController > boardMapper 순으로 작성합니다.
-
-다음으로 board 폴더 아래에 boardList.jsp 파일을 하나 만들고 코드를 작성합니다. 
 
 
 
