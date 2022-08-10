@@ -90,27 +90,272 @@ src/main/resources 에 application.yml 을 하나 만듭니다. 이는 계층 �
 
 
 
----
-
-Top.jspf > boardController > boardMapper 순으로 작성합니다.
-
-다음으로 board 폴더 아래에 boardList.jsp 파일을 하나 만들고 코드를 작성합니다. 
-
-
-
 
 
 ----
 
+HTTP 이란?
+
+> 인터넷상에서 데이터를 주고 받기 위한 약속
+
+
+
+
+
+@RequestMapping("/login") 이란?
+
+> - 요청에 대해 어떤 Controller, 어떤 메소드가 처리할지 맵핑하기 위한 어노테이션
+> - 클래스나 메소드 선언부에 @RequestMapping 과 함께 URL 을 명시하여 사용
+> - 요청 주소 (url) 설정, 요청 방식 (GET, POST, DELETE, PATCH) 설정
+> - 요청방식들을 동시에 설정 가능 
+
+```java
+@RequestMapping(value="/test7", method={RequestMethod.GET, RequestMethod.POST})
+```
+
+
+
+@RequestParam 이란?
+
+> 사용자가 원하는 매개변수에 값을 매핑하기 위해 사용합니다.
+
+
+
+@GetMapping / @PostMapping 이란?
+
+> 요청방식별로 제공되는 어노테이션
+>
+> 
+
+
+
+@RestController 이란?
+
+> 스프링프레임워크 4 버전 이상부터 사용 가능한 어노테이션으로 @Controller 에 @ResponseBody 가 결합된 어노테이션입니다. 
+>
+> @ResponseBody 를 생략하는 방법입니다.
+
+
+
+@RequestBody 맵핑이란?
+
+> 맵핑이란 단순히 값을 넣어줬다는 뜻으로 우리 시스템으로 날아온 형태(JSON)의 데이터를 JAVA 객체에 자동으로 값을 넣어주는 어노테이션이 @RequestBody 입니다. 
+
+```java
+@RestController
+public class LoginController{
+	
+	@RequestMapping("/login")
+	public LoginVO test(@RequestBody User user){
+		LoginVO loginVo = userService.login(user);
+		return loginVo;
+	}
+
+}
+```
+
+
+
+@ResponseBody 란?
+
+> VO 객체를 JSON 으로 바꿔서 HTTP body 에 담는 스프링 어노테이션
+
+```java
+@ResponseBody
+@RequestMapping(value="/test")
+public LoginVO test() throws Exception{
+  
+  LoginVO loginVO = new LoginVO();
+  loginVO.setId("admin");
+  
+  return loginVO;
+}
+```
+
+![image-20220810124544819](web_springboot.assets/image-20220810124544819.png)
+
 
 
 
 
 ---
 
-Board 를 만들어봅시다.
+### BoardList
+
+게시판 리스트를 만들어봅시다.
+
+#### DB설계
+
+
+
+#### 처리조건
+
+* DB 모델링 작성. 테이블명 board 로 설정
+* 한 페이지에 5개의 레코드 표시
+* 글제목 긴 경우 말줄임(...) 표시 스타일시트 적용
+* 페이징 처리 구현, 한번에 표시할 페이즈 번호는 5개로 설정
+* 검색어를 입력하여 검색기능 가능
+* 전체선택 및 선택 삭제 가능
+
+
 
 Views > board 폴더 생성 후 com.cali.myapp 에 각각의 패키지를 생성합니다. 
+
+다음으로 board 폴더 아래에 boardList.jsp 파일을 하나 만들고 코드를 작성합니다. 
+
+코드는 Top.jspf > boardController > boardMapper > BoardVO > BoardDAO > BoardService > BoardServiceImpl 순으로 작성합니다.
+
+
+
+
+
+---
+
+### BoardForm
+
+게시판에 글쓰기 기능을 추가해보자.
+
+
+
+### PagingVO
+
+게시판 리스트를 페이징으로 만들어보자.
+
+
+
+### BoardView
+
+다음으로 게시글 클릭 시 해당 게시물로 넘어가는 기능을 추가해보자.
+
+게시판 (boardList) 에서 리스트의 제목 (subject) 를 클릭하면 boardView 로 이동합니다. 
+
+제목에는 searchWord, searchKey 조건문 필터를 걸어놓고 boardList 의 필터 및 검색 form (searchFrm) 을 submit 하면 찾을 수 있게 합니다.
+
+
+
+목록으로 돌아가기 링크
+
+```jsp
+<a href = "/board/boardList?nowPage=${pvo.nowPage }<c:if test='${pvo.searchWord!=null }'>&searchKey=${pvo.searchKey }&searchWord=${pvo.searchWord }</c:if>">목록</a>
+```
+
+
+
+- [x] Controller 에 view 맵핑하기
+
+
+
+```
+- [ ] 이거는 곧 할 일입니다.
+- [X] 완료 한 일입니다.
+```
+
+
+
+이때 조회수 증가도 함께 기능을 만들어줍니다.
+
+- [ ] hitCount 조회수 증가 - 증가 안됨
+
+
+
+- [x] search 에 자바스크립트 걸기
+
+boardList 에 자바스크립트 추가
+
+```javascript
+	$(function(){
+		$("#searchFrm").submit(function(){
+			if($("#searchWord").val()==""){
+				alert("검색어를 입력하세요.);
+				return false;
+			}
+			return true;
+		});
+```
+
+boardMapper 에서 select 구문 수정
+
+```jsp
+	<select id="boardList" resultType="BoardVO">
+		select no, subject, userid, hit, date_format(writedate, '%m-%d %h:%i') writedate
+		from board
+		<if test="searchWord != null">
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+		order by no desc
+		limit ${onePageRecord} offset ${offsetPoint}
+	</select>
+```
+
+
+
+
+
+- [ ] 게시물 썸네일 형식으로 바꾸기 (4x2)
+
+
+
+- [ ] 다운 받아서 합쳐보기
+
+- [ ] 게시물 더미 데이터 추가하기 
+
+
+
+boardEdit 추가하기
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 BoardVO.java 를 생성합니다.
 
