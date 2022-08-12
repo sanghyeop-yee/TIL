@@ -254,7 +254,7 @@ Views > board 폴더 생성 후 com.cali.myapp 에 각각의 패키지를 생성
 
 이때 조회수 증가도 함께 기능을 만들어줍니다.
 
-- [ ] hitCount 조회수 증가 - 증가 안됨
+- [x] hitCount 조회수 증가 - 증가 안됨
 
 
 
@@ -293,11 +293,15 @@ boardMapper 에서 select 구문 수정
 
 - [ ] 게시물 썸네일 형식으로 바꾸기 (4x2)
 
+Ul gall_list > li
 
 
-- [ ] 다운 받아서 합쳐보기
 
-- [ ] 게시물 더미 데이터 추가하기 
+- [x] 다운 받아서 합쳐보기
+
+- [ ] 게시물 더미 데이터 찾고 추가하기
+- [ ] [스프링으로 게시판에 이미지 업로드 하기](https://asfarasiknow.tistory.com/7)
+- [ ] 
 
 
 
@@ -306,6 +310,36 @@ boardEdit 추가하기
 
 
 
+
+### 스프링으로 게시판에 이미지 업로드하기
+
+newsForm 에서 subject, content 를 작성하고 image 를 1-3개까지 올리면 form 을 submit 할 수 있습니다. 
+
+성공적으로 submit 이 되면 newsFormOk 에 데이터를 게시합니다. 
+
+userid 및 service.newsWriteOk(vo) 를 반환합니다. 
+
+
+
+DB 에 사용될 VO 를  만들어놓고
+
+Controller 에서 POST 요청으로 "newsFormOk" 에 데이터를 게시하는 코드를 추가하고
+
+mapper 에서 id="newsWriteOk" 쿼리문을 만듭니다.
+
+DAO > Service > ServiceImpl 순으로 메소드를 추가합니다. 
+
+
+
+
+
+* newsForm 폼태그에 추가합니다. 
+  `enctype="multipart/form-data"`
+
+
+
+* DTO 로 넘기고자 하는 값을 하나씩 set 으로 입력시켜줍니다.
+  `dto.setWriter(request.getParameter(""));`
 
 
 
