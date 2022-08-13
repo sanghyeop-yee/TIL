@@ -343,9 +343,58 @@ DAO > Service > ServiceImpl 순으로 메소드를 추가합니다.
 
 
 
+```java
+@PostMapping("/newsInsert")
+	public String newsInsert(@RequestParam("file1") MultipartFile file , VboardVO vo , HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println(file);
+		try {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+		String fileLoca = sdf.format(date);
+		
+		String uploadPath = req.getSession().getServletContext().getRealPath("/resources/images/thumbnail");
+		
+		System.out.println();
+		File folder = new File(uploadPath);
+		if(!folder.exists()) {
+			folder.mkdir(); //폴더가 존재하지 않는다면 생성해라.
+		}
+		
+		String fileRealName = file.getOriginalFilename();
+		
+		UUID uuid = UUID.randomUUID();
+		String uuids = uuid.toString().replaceAll("-", "");
+		
+		String fileExtension = fileRealName.substring(fileRealName.indexOf("."), fileRealName.length());
+		
+		System.out.println("저장할 폴더 경로: " + uploadPath);
+		System.out.println("실제 파일명: " + fileRealName);
+		System.out.println("폴더명: " + fileLoca);
+		System.out.println("확장자: " + fileExtension);
+		System.out.println("고유랜덤문자: " + uuids);
+		
+		String fileName = uuids + fileExtension;
+		System.out.println("변경해서 저장할 파일명: " + fileName);
+		
+		File saveFile = new File(uploadPath + "\\" + fileName);
+	
+			file.transferTo(saveFile);
+			
+			VboardVO Vvo = new VboardVO(0,vo.getVboard_title(),vo.getVboard_writer(), vo.getVboard_content() , 0, 0, vo.getVboard_type(), null, fileName, fileLoca, fileRealName, uploadPath, null,null,0,0);
+			
+				service.newsInsert(Vvo);
 
-
-
+			} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		//service.newsInsert(vo);
+		return "redirect:/news/newsList";
+	} 
+	
+	
+```
 
 
 
