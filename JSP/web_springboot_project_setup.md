@@ -398,6 +398,51 @@ DAO > Service > ServiceImpl 순으로 메소드를 추가합니다.
 
 
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.seu.app.dao.NewsDAO">
+	<select id="newsList" resultType="NewsVO">
+		select no, subject, userid, hit, date_format(writedate, '%m-%d %h:%i') writedate
+		from news
+		<if test="searchWord != null">
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+		order by no desc
+		limit ${onePageRecord} offset ${offsetPoint}
+	</select>
+	<insert id="newsInsert">
+		insert into news(no, subject, content, userid, name, hit, category, writedate, filename, fileloca, filerealname, uploadpath, file, material)
+		values(#{no}, #{subject}, #{content}, #{userid}, #{name}, #{hit}, #{category}, #{writedate}, #{filename}, #{fileloca}, #{filerealname}, #{uploadpath}, #{file}, #{material})
+	</insert>
+	<select id="totalRecord" resultType="int">
+		select count(no) cnt from news
+		<if test='searchWord != null'>
+			where ${searchKey} like '%${searchWord}%'
+		</if>
+	</select>
+	<select id="getNews" resultType="NewsVO" parameterType="int">
+		select no, subject, content, hit, date_format(writedate, '%M %d %Y') writedate
+		from news
+		where no = ${param1}
+	</select>
+	<update id="hitCount">
+		update news set hit = hit + 1 where no = ${param1}
+	</update>
+		<delete id = "newsDel">
+		delete from news where no = ${param1} and userid = #{param2}
+	</delete>
+	<update id = "newsEditOk" parameterType = "NewsVO">
+		update news set subject = #{subject}, content = #{content} 
+		where no = ${no} and userid = #{userid}
+	</update>
+</mapper>
+
+
+```
+
 
 
 
