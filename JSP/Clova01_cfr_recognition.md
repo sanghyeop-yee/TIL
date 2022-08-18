@@ -1,4 +1,4 @@
-# Naver Cloud Platform API
+# Naver Cloud Platform API : CFR Recognition
 
 > Wed Aug 17
 
@@ -8,7 +8,9 @@ Controller (자바 IO) 를 이용해서 네이버에 필요한 정보를 보내�
 
 이것이 바로 REST API 입니다. 
 
-처음에 [CFR](https://www.ncloud.com/product/aiService/cfr) 이라는 API 를 활용해봅시다.
+
+
+처음에 [CFR](https://www.ncloud.com/product/aiService/cfr) 이라는 얼굴 감지 API 를 활용해봅시다. 
 
 
 
@@ -319,7 +321,81 @@ public class ClovaFileupload {
 
 
 
+`response.toString();` 을 통해 프론트 (ajax 의 result 로) 보내줍니다. 
 
+
+
+JSON 데이터를 표형태로 출력해봅시다. 표는 부트스트랩 4.6 을 활용합니다. 
+
+```jsp
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+```
+
+
+
+jquery 의 map() 이라는 반복문을 활용해봅시다. 
+
+```javascript
+// 이미지파일이 포함된 폼을 객체로 만들어 서버로 전송한다. 
+						var form = $("#cfrForm")[0]; // form 의 0번째 있는것을
+						var data = new FormData(form); // 이미지파일이 포함된 폼을 객체로 만들어
+						
+						$.ajax({
+							type : "post",
+							dataType : "text",
+							url : "/cfrOk",
+							async : false,
+							processData : false,
+							contentType : false,
+							data : data,
+							success : function(result){
+								// console.log(result);
+								$("#txt").val(result);
+								// 문자열을 Json 으로 변환해준다.
+								var jsonData = JSON.parse(result);
+								console.log(jsonData); // console 에 찍어보기
+								// var gender = jsonData.faces[0].gender.value; // 성별만 구해보기
+								// console.log(gender);
+								// $("#view").html(gender); 
+								var tag = "<h2>폭="+ jsonData.info.size.width+ ",높이="+ jsonData.info.size.height+ "</h2>";
+								
+								tag += "<table class='table table-striped'>";
+								tag += "<tr><td>번호</td><td>나이</td><td>성별</td><td>눈(좌)</td><td>눈(우)</td>";
+							 	tag += "<td>코</td><td>입(좌)</td><td>입(우)</td><td>모션</td><td>포즈</td></tr>";
+							 	
+							 	// 얼굴수 만큼 반복문 실행
+							 	//		 faces:[{},{},{}]	위치정보, index
+							 	jsonData.faces.map(function(face,   idx){ // 배열의 수만큼 반복
+							 		tag += "<tr><td>"+(idx+1)+"</td>";
+							 		tag += "<td>"+ face.age.value + "</td>"; // 나이
+							 		if(face.gender.value=='male'){ // 성별
+							 			tag += "<td>남자</td>";
+							 		}else{
+							 			tag += "<td>여자</td>";
+							 		}
+							 		if(face.landmark==null){ // landmark : 눈, 코, 입
+							 			tag += "<td></td><td></td><td></td><td></td><td></td>";
+							 		}else{
+							 			tag += "<td>"+ face.landmark.leftEye.x + "," + face.landmark.leftEye.y + "</td>"; // 왼쪽눈
+							 			tag += "<td>"+ face.landmark.rightEye.x + "," + face.landmark.rightEye.y + "</td>"; // 오른쪽눈
+							 			tag += "<td>"+ face.landmark.nose.x + "," + face.landmark.nose.y +"</td>"; // 코의 위치
+							 			tag += "<td>"+ face.landmark.leftMouth.x + "," + face.landmark.leftMouth.y + "</td>"; // 왼쪽입꼬리
+							 			tag += "<td>"+ face.landmark.rightMouth.x + "," + face.landmark.rightMouth.y + "</td>"; // 왼쪽입꼬리
+							 		}
+							 		tag += "<td>" + face.emotion.value + "</td>"; // 감정
+							 		tag += "<td>" + face.pose.value + "</td>"; // 포즈
+							 	});
+							 	tag += "</table>";
+								
+								$("#view").html(tag); // tag 에 추가하기 말고 append 로도 사용가능
+								
+							}, error : function(e){
+								console.log(e.responseText);
+							}
+					
+						});
+```
 
 
 
