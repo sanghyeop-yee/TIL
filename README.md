@@ -8,10 +8,10 @@ What I'm learning.
 ### JSP
 #### Naver Cloud Platform
 * Clova01 Sentiment
-Clova02 Sentiment
-Clova03 Sentiment
-Clova04 Sentiment
-Clova05 Sentiment
+* Clova02 Sentiment
+* Clova03 Sentiment
+* Clova04 Sentiment
+* Clova05 Sentiment
 
 ## 2. Data Analytics using SQL
 
