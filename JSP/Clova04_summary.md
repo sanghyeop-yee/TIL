@@ -2,6 +2,10 @@
 
 > Thu Aug 18, 2022
 
+---
+
+[toc]
+
 [Clova Summary](https://api.ncloud-docs.com/docs/ai-naver-clovasummary)
 
 이번에는 다양한 주제의 원문(문서)으로부터 핵심 문장을 추출하여 1~2줄로 요약하는 서비스를 사용해봅시다.
@@ -215,3 +219,6 @@ public class Clova04_summary_controller {
 
 ```
 
+
+
+![image-20220819091516815](Clova04_summary.assets/image-20220819091516815.png)
