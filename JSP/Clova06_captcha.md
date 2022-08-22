@@ -6,6 +6,8 @@
 
 [toc]
 
+[CAPTCHA](https://www.ncloud.com/product/applicationService/captcha)
+
 
 
 #### home.jsp
