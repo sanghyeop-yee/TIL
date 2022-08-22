@@ -14,7 +14,9 @@ What I'm learning.
 * [Clova04 Summary](https://github.com/sanghyeop-john/TIL/blob/master/JSP/Clova04_summary.md)
 * [Clova05 Sentiment](https://github.com/sanghyeop-john/TIL/blob/master/JSP/Clova05_sentiment.md)
 * [Clova06 Captcha](https://github.com/sanghyeop-john/TIL/blob/master/JSP/Clova06_captcha.md)
-* Clova07 OCR Text
+* [Clova07 OCR Text](https://github.com/sanghyeop-john/TIL/blob/master/JSP/Clova07_ocr.md)
+
+
 
 ## 2. Data Analytics using SQL
 
