@@ -1,8 +1,14 @@
 
 
-녹음를 해서 바로 음성을 텍스트로 변환하는 기능을 만들어봅시다.
+# Naver Cloud Platform API : CSR Speech Record
 
-녹음는 자바스크립트의 객체 Navigation 이 합니다.
+> Thu Aug 18, 2022
+
+[toc]
+
+이어서 녹음를 해서 바로 음성을 텍스트로 변환하는 기능을 만들어봅시다.
+
+녹음 기능은 자바스크립트의 객체 Navigation 이 합니다.
 
 
 
@@ -10,7 +16,7 @@
 
 
 
-#### home.jsp
+#### [View] home.jsp
 
 홈화면에 링크 추가하기
 
@@ -20,7 +26,7 @@
 
 
 
-#### Clova03_csr_speech_record_controller.java
+#### [Controller] Clova03_csr_speech_record_controller.java
 
 링크를 누르면 요청하여 리턴할 뷰페이지를 추가합니다.
 
@@ -43,7 +49,7 @@ public class Clova03_csr_speech_record_controller {
 
 
 
-#### css_speech_record.jsp
+#### [View] csr_speech_record.jsp
 
 녹음 기능을 jquery 말고 javascript 로 구현해보겠습니다.
 
@@ -79,4 +85,6 @@ public class Clova03_csr_speech_record_controller {
 이제 홈화면으로 가서 링크를 클릭하면 뷰페이지가 나오는지 확인합니다.
 
 
+
+#### [Controller] Clova03_csr_speech_record_controller.java
 
