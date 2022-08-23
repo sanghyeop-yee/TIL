@@ -148,7 +148,7 @@ controller DB 작업을 하고 View 로 보냅니다. view , data 기능
 예를 들어 아이디, 비밀번호 확인하는것이죠. 
 
 ```javascript
-if($(#userif).val()==""){
+if($("#userid").val()==""){
   alert("아이디를 입력하세요");
 	$("#userid").focus(); // 입력칸으로 이동
 	return false;
