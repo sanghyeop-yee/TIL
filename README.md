@@ -20,6 +20,8 @@ What I'm learning.
 
 ## 2. Data Analytics using SQL
 
+
+
 ## 3. Data Analytics using Python
 
 ## 4. Data Science using Python
