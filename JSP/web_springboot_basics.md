@@ -129,7 +129,16 @@ Spring의 특징들은 아래와 같습니다.
 
 ### 3. HttpServletRequest, HttpServletResponse
 
-
+* WAS 가 웹브라우저로부터 Servlet 요청을 받으면
+  * 요청을 받을 때 전달 받은 정보를 HttpServletRequest 객체를 생성하여 저장
+  * 웹브라우저에게 응답을 돌려줄 HttpServletResponse 객체를 생성 (빈 객체)
+  * 생성된 HttpServletRequest (정보가 저장된) 와 HttpServletResponse (비어있는) 를 Servlet 에게 전달
+* HttpServletRequest
+  * Http 프로토콜의 request 정보를 서블릿에게 전달하기 위한 목적으로 사용
+  * Header 정보, Parameter, Cookie, URI, URL 등의 정보를 읽어들이는 메소드를 가진 클래스
+  * Body 의 Stream 을 읽어들이는 메소드를 가지고 있음
+* HttpServletResponse
+  * Servlet 은 HttpServletResponse 객체에 Content Type, 응답코드, 응답메세지 등을 담아서 전송함
 
 
 
